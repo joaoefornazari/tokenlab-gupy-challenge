@@ -1,3 +1,6 @@
+# Frontend files
 frontend/node_modules
+frontend/.angular
+
 backend/node_modules
 .vscode
