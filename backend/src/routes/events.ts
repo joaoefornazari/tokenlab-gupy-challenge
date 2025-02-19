@@ -1,8 +1,8 @@
 import { Router } from 'express';
 const router = Router();
 
-import EventController from '../src/http/controllers/eventController';
-import EventService from '../src/http/services/eventService';
+import EventController from '../http/controllers/eventController.js';
+import EventService from '../http/services/eventService.js';
 
 // ROUTE: /events
 const eventController = new EventController(new EventService());
