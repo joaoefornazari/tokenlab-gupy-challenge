@@ -25,7 +25,7 @@ const migration = {
 			},
 			content: {
 				type: DataTypes.TEXT('long'),
-				allowNull: false,
+				allowNull: true,
 			},
 		})
   },
