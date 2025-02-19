@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../database/database';
 
-sequelize.define(
+const Event = sequelize.define(
 	'Event',
 	{
 		id: {
@@ -36,3 +36,5 @@ sequelize.define(
 		tableName: 'events',
 	}
 );
+
+export default Event;
