@@ -5,9 +5,9 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import indexRouter from './routes/index.js';
-import usersRouter from './routes/users.js';
-import eventsRouter from './routes/events.js';
+import indexRouter from './routes/index.ts';
+import usersRouter from './routes/users.ts';
+import eventsRouter from './routes/events.ts';
 
 const app = Express();
 
@@ -41,4 +41,4 @@ app.use(function(err: HTTPError, req: Request, res: Response, next: NextFunction
   res.render('error');
 });
 
-module.exports = app;
+export default app;

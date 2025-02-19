@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../../database/database.js';
+import sequelize from '../../database/database.ts';
 
 const Event = sequelize.define(
 	'Event',
@@ -23,7 +23,7 @@ const Event = sequelize.define(
 		},
 		content: {
 			type: DataTypes.TEXT('long'),
-			allowNull: false,
+			allowNull: true,
 		},
 		/*
 		timezone: {
