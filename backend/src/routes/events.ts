@@ -2,24 +2,22 @@ import { Router } from 'express';
 const router = Router();
 
 import EventController from '../http/controllers/eventController.ts';
-import EventService from '../http/services/eventService.ts';
 
 // ROUTE: /events
-const eventController = new EventController(new EventService());
  
 /* GET events listing. */
-router.get('/', eventController.get);
+router.get('/', EventController.get);
 
 /* GET specific event. */
-router.get('/:id', eventController.getById);
+router.get('/:id', EventController.getById);
 
 /* POST create event. */
-router.post('/', eventController.create);
+router.post('/', EventController.create);
 
 /* PUT update event. */
-router.put('/:id', eventController.update);
+router.put('/:id', EventController.update);
 
 /* DELETE event. */
-router.delete('/:id', eventController.delete);
+router.delete('/:id', EventController.delete);
 
 export default router;
