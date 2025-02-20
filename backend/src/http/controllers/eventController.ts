@@ -1,16 +1,13 @@
 import { Request, Response } from 'express';
-import EventService from '../services/eventService';
+import EventService from '../services/eventService.ts';
+import EventRepository from '../repositories/eventRepository.ts';
+
+const eventService = new EventService(new EventRepository());
 
 class EventController {
-	protected eventService: EventService;
-
-	constructor(eventService: EventService) {
-		this.eventService = eventService;
-	}
-
 	async create(req: Request, res: Response) {
 		try {
-			const event = this.eventService.createEvent(req.body);
+			const event = await eventService.createEvent(req.body);
 			res.status(201).json(event);
 		} catch (error: any) {
 			res.status(500).json({ error: error.message });
@@ -19,7 +16,7 @@ class EventController {
 
 	async get(req: Request, res: Response) {
 		try {
-			const events = this.eventService.getEvents();
+			const events = await eventService.getEvents();
 			res.status(200).json(events);
 		} catch (error: any) {
 			res.status(500).json({ error: error.message });
@@ -28,7 +25,7 @@ class EventController {
 
 	async getById(req: Request, res: Response) {
 		try {
-			const event = this.eventService.getEvent(req.params.id);
+			const event = await eventService.getEvent(req.params.id);
 			res.status(200).json(event);
 		} catch (error: any) {
 			res.status(500).json({ error: error.message });
@@ -37,7 +34,7 @@ class EventController {
 
 	async update(req: Request, res: Response) {
 		try {
-			const event = this.eventService.updateEvent(req.params.id, req.body);
+			const event = await eventService.updateEvent(req.params.id, req.body);
 			res.status(200).json(event);
 		} catch (error: any) {
 			res.status(500).json({ error: error.message });
@@ -46,7 +43,7 @@ class EventController {
 
 	async delete(req: Request, res: Response) {
 		try {
-			this.eventService.deleteEvent(req.params.id);
+			await eventService.deleteEvent(req.params.id);
 			res.status(204).send();
 		} catch (error: any) {
 			res.status(500).json({ error: error.message });
@@ -54,4 +51,4 @@ class EventController {
 	}
 }
 
-export default EventController;
+export default new EventController;
