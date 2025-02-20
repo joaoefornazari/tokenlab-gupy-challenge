@@ -22,14 +22,19 @@ class EventService {
 	}
 
 	async createEvent(event: any) {
-		
 		// Validate event
 		if (
-			!event.description ||
-			!event.start_datetime ||
-			!event.end_datetime
+			!(event.description && event.description.length > 0) ||
+			!(event.start_datetime && event.start_datetime.length > 0) ||
+			!(event.end_datetime && event.end_datetime.length > 0)
 		) {
-			throw new Error('Invalid event');
+			throw new Error('Invalid event payload. Check fields again.', { cause: { code: 400 } });
+		}
+
+		if (
+			new Date(event.start_datetime) > new Date(event.end_datetime)
+		) {
+			throw new Error('Event datetime start and end are not valid.', { cause: { code: 400 } });
 		}
 
 		return await this.eventRepository.create(event);
@@ -37,6 +42,20 @@ class EventService {
 
 	async updateEvent(id: string, event: any) {
 		const parsedId = parseInt(id);
+
+		if (
+			event.start_datetime.length === 0 ||
+			event.end_datetime.length === 0
+		) {
+			throw new Error('Invalid event payload. Check fields again.', { cause: { code: 400 } });
+		}
+
+		if (
+			new Date(event.start_datetime) > new Date(event.end_datetime)
+		) {
+			throw new Error('Event datetime start and end are not valid.', { cause: { code: 400 } });
+		}
+
 		return await this.eventRepository.update(parsedId, event);
 	}
 }

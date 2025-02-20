@@ -10,7 +10,7 @@ class EventController {
 			const event = await eventService.createEvent(req.body);
 			res.status(201).json(event);
 		} catch (error: any) {
-			res.status(500).json({ error: error.message });
+			res.status(error?.cause?.code ? error.cause.code : 500).json({ error: error.message });
 		}
 	}
 
