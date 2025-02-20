@@ -1,5 +1,5 @@
-import EventRepositoryInterface from '../interfaces/eventRepositoryInterface';
-import Event from '../models/event';
+import EventRepositoryInterface from '../interfaces/eventRepositoryInterface.ts';
+import Event from '../models/event.ts';
 
 class EventRepository implements EventRepositoryInterface {
 

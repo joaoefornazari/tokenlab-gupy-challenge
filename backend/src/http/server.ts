@@ -4,10 +4,11 @@
  * Module dependencies.
  */
 
-var app = require('../../app');
-var debug = require('debug')('backend:server');
-var http = require('http');
-var database = require('../database/database');
+import app from '../app.ts'
+import debug from 'debug';
+import http from 'http';
+import database from '../database/database.ts'
+import { AddressInfo } from 'net';
 
 /**
  * Get port from environment and store in Express.
@@ -83,7 +84,7 @@ function onError(error: { syscall: string, code: string }) {
  */
 
 function onListening() {
-  var addr = server.address();
+  var addr = server.address() as string | AddressInfo;
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
