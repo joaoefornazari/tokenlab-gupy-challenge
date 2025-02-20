@@ -15,11 +15,13 @@ app.use(logger('dev'));
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(Express.static(path.join(__dirname, 'public')));
+// app.use(Express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/events', eventsRouter);
+const apiPrefix = process.env.API_PREFIX;
+
+app.use(`${apiPrefix}`, indexRouter);
+app.use(`${apiPrefix}/users`, usersRouter);
+app.use(`${apiPrefix}/events`, eventsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
