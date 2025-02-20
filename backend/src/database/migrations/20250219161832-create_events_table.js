@@ -27,6 +27,15 @@ const migration = {
 				type: DataTypes.TEXT('long'),
 				allowNull: true,
 			},
+			createdAt: {
+				type: DataTypes.DATE,
+				allowNull: false,
+				defaultValue: DataTypes.NOW,
+			},
+			updatedAt: {
+				type: DataTypes.DATE,
+				allowNull: true,
+			},
 		})
   },
 
