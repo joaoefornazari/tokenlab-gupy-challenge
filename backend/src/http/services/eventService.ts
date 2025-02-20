@@ -1,10 +1,10 @@
-import EventRepository from "../repositories/eventRepository";
+import EventRepository from "../repositories/eventRepository.ts";
 
 class EventService {
 	protected eventRepository: EventRepository;
 
-	constructor() {
-		this.eventRepository = new EventRepository();
+	constructor(eventRepository: EventRepository) {
+		this.eventRepository = eventRepository;
 	}
 
 	async getEvents() {
