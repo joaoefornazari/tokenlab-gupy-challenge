@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
+  selector: 'calendar-header',
   imports: [],
-  template: `
-    <p>
-      header works!
-    </p>
-  `,
-  styles: ``
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
 

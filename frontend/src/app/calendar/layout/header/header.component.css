@@ -1,0 +1,9 @@
+.calendar-layout__header {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+}
+
+.salutation {
+	margin-right: .5rem;
+}
