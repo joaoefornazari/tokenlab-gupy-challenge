@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ListComponent as CalendarList } from './list/list.component';
 
 @Component({
@@ -26,35 +26,35 @@ export class HomeComponent {
 	public getTodayYear() {
 		return this.today.getFullYear()
 	}
-
+	
 	public getCurrentMonth() {
-		return this.current.getMonth()
+		return this.current.toLocaleString('pt', { month: 'long' }).toUpperCase()
 	}
-
+		
 	public getCurrentDay() {
 		return this.current.getDay()
 	}
-
+		
 	public getCurrentYear() {
 		return this.current.getFullYear()
 	}
-
+	
 	public changeCurrentMonth(month: 'previous' | 'next' | number) {
 		const newMonth = (month === 'previous' ? this.current.getMonth() - 1 : this.current.getMonth() + 1)
 		this.current.setMonth(newMonth)
 		return 
 	}
-
+	
 	public changeCurrentYear(year: number) {
 		this.current.setFullYear(year)
 		return
 	}
-
+	
 	public changeCurrentDay(day: number) {
 		this.current.setDate(day)
 		return
 	}
-
+	
 	public backToToday() {
 		this.current = this.today
 		return
