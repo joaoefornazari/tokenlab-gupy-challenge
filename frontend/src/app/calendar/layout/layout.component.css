@@ -1,0 +1,6 @@
+.calendar-layout {
+	display: flex;
+	flex-flow: column;
+	align-items: start;
+	gap: 1rem;
+}
