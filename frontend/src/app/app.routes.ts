@@ -4,13 +4,15 @@ import { HomeComponent } from './calendar/home/home.component';
 import { NewEventComponent } from './calendar/new-event/new-event.component';
 
 export const routes: Routes = [
-	{ path: '', redirectTo: '/calendar/home', pathMatch: 'full' },
 	{ 
 		path: 'calendar',
-		redirectTo: '/calendar/home',
-		pathMatch: 'full',
 		component: CalendarLayout,
 		children: [
+			{
+				path: '',
+				redirectTo: 'home',
+				pathMatch: 'full',
+			},
 			{
 				path: 'home',
 				component: HomeComponent,
@@ -21,4 +23,5 @@ export const routes: Routes = [
 			},
 		],
 	},
+	{ path: '', redirectTo: '/calendar', pathMatch: 'full' },
 ];
