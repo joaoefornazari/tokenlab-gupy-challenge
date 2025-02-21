@@ -12,3 +12,12 @@ body {
 	--full-screen-width: calc(100vw - 4rem);
 	--full-screen-height: calc(100vh - 4rem);
 }
+
+button {
+	padding: .4rem;
+	min-width: 2rem;
+}
+
+button:hover {
+	cursor: pointer;
+}
