@@ -9,4 +9,4 @@
 		<button class="calendar-layout__month-year__button" (click)="changeCurrentMonth('next')" >></button>
 	</div>
 </div>
-<calendar-list [currentMonth]="current.getMonth()"></calendar-list>
+<calendar-list [currentMonth]="current.getMonth()" [currentYear]="getCurrentYear()"></calendar-list>
