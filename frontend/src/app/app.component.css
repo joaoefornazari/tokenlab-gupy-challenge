@@ -1,7 +1,5 @@
 .main {
 	display: flex;
-	width: calc(100vw - 4rem); /* 100% - 2rem padding on each side */
-	height: calc(100vh - 4rem); /* 100% - 2rem padding on each side */
+	width: calc(100vw - 6rem); /* 100% - 2rem padding on each side */
 	padding: 2rem;
-	background-color: #f0f0f0;
 }
