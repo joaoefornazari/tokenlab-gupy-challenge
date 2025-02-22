@@ -1,10 +1,11 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { EventBadgeComponent } from './event-badge/event-badge.component';
+import { CalendarEvent, DayInfo } from 'src/types';
 
 @Component({
   selector: 'calendar-list',
-  imports: [NgFor, EventBadgeComponent],
+  imports: [NgFor, EventBadgeComponent, NgIf],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
@@ -14,7 +15,7 @@ export class ListComponent implements OnChanges {
 	@Input() currentYear!: number
 	
 	private monthAmountOfDays: number = 0
-	private listDays: { day: number, events: any }[] = []
+	private listDays: DayInfo[] = []
 
 	constructor() {}
 
@@ -64,5 +65,9 @@ export class ListComponent implements OnChanges {
 
 	public getListDays(): any[] {
 		return this.listDays
+	}
+
+	public hasEvents(day: number) {
+		return this.getListDays()[day - 1]
 	}
 }

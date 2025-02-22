@@ -1,12 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgIf } from '@angular/common'
-
-type CalendarEvent = {
-	description: string
-	start_datetime: string
-	end_datetime: string
-	content?: string
-}
+import { CalendarEvent } from 'src/types';
 
 @Component({
   selector: 'calendar-event-badge',
