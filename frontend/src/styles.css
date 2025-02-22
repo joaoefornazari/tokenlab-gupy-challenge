@@ -14,11 +14,15 @@ body {
 	--full-screen-height: calc(100vh - 4rem);
 }
 
-button {
+.btn-standard {
 	padding: .4rem;
 	min-width: 2rem;
 }
 
 button:hover {
 	cursor: pointer;
+}
+
+p {
+	font-size: .8rem;
 }
