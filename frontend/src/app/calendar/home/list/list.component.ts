@@ -67,7 +67,7 @@ export class ListComponent implements OnChanges {
 		return this.listDays
 	}
 
-	public hasEvents(day: number) {
-		return this.getListDays()[day - 1]
-	}
+	// public hasEvents(day: number): boolean {
+	// 	return this.getListDays()[day - 1].length > 0
+	// }
 }
