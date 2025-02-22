@@ -15,19 +15,19 @@ export class HomeComponent {
 		this.current = this.today
 	}
 
-	public getTodayMonth() {
+	public getTodayMonth(): number {
 		return this.today.getMonth()
 	}
 
-	public getTodayDay() {
+	public getTodayDay(): number {
 		return this.today.getDay()
 	}
 
-	public getTodayYear() {
+	public getTodayYear(): number {
 		return this.today.getFullYear()
 	}
 	
-	public getCurrentMonth(type: 'number' | 'name') {
+	public getCurrentMonth(type: 'number' | 'name'): string | number {
 		return type === 'name' 
 			? this.current.toLocaleString('pt', { month: 'long' }).toUpperCase()
 			: this.current.getMonth()
