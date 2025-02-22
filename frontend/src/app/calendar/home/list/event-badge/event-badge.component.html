@@ -1,0 +1,33 @@
+<div *ngIf="!isExpanded()" class="event-badge" (click)="toggleExpanded()">
+	<div class="event-badge__summary">
+		<h4>{{ getDescription() }}</h4>
+		<span>{{ getStart() }} - {{ getEnd() }}</span>
+	</div>
+	<div>
+		<button class="event-badge__button">
+			✏
+		</button>
+		<button class="event-badge__button">
+			🗑
+		</button>
+	</div>
+</div>
+<div *ngIf="isExpanded()" class="event-badge expanded" (click)="toggleExpanded()">
+	<div class="event-badge__header">
+		<div class="event-badge__summary">
+			<h4>{{ getDescription() }}</h4>
+			<span>{{ getStart() }} - {{ getEnd() }}</span>
+		</div>
+		<div>
+			<button class="event-badge__button">
+				✏
+			</button>
+			<button class="event-badge__button">
+				🗑
+			</button>
+		</div>
+	</div>
+	<p *ngIf="hasContent()" class="event-badge__content">
+		{{ getContent() }}
+	</p>
+</div>
