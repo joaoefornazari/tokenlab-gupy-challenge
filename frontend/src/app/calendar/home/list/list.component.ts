@@ -1,11 +1,12 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, model, ModelSignal } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { EventBadgeComponent } from './event-badge/event-badge.component';
-import { CalendarEvent, DayInfo } from 'src/types';
+import { DayInfo } from 'src/types';
+import { EventFormComponent } from './event-form/event-form.component';
 
 @Component({
   selector: 'calendar-list',
-  imports: [NgFor, EventBadgeComponent, NgIf],
+  imports: [NgFor, NgIf, EventBadgeComponent, EventFormComponent],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
@@ -16,6 +17,8 @@ export class ListComponent implements OnChanges {
 	
 	private monthAmountOfDays: number = 0
 	private listDays: DayInfo[] = []
+
+	private addingEvent: boolean = false
 
 	constructor() {}
 
@@ -56,7 +59,7 @@ export class ListComponent implements OnChanges {
 	}
 
 	public setListDays(amountOfDays: number) {
-		const listDays: { day: number, events: any }[] = []
+		const listDays: DayInfo[] = []
 		for (let i = 1; i <= amountOfDays; i++) {
 			listDays.push({ day: i, events: [] })
 		}
@@ -67,7 +70,15 @@ export class ListComponent implements OnChanges {
 		return this.listDays
 	}
 
-	// public hasEvents(day: number): boolean {
-	// 	return this.getListDays()[day - 1].length > 0
-	// }
+	public isAddingEvent(): boolean {
+		return this.addingEvent
+	}
+
+	public startAddingEvent(): void {
+		this.addingEvent = true
+	}
+
+	public stopAddingEvent() {
+		this.addingEvent = false
+	}
 }
