@@ -4,9 +4,9 @@
 		<span class="calendar-layout__year">{{ getCurrentYear() }}</span>
 	</h3>
 	<div class="calendar-layout__month-year__buttons">
-		<button class="calendar-layout__month-year__button">+</button>
-		<button class="calendar-layout__month-year__button" (click)="changeCurrentMonth('previous')" ><</button>
-		<button class="calendar-layout__month-year__button" (click)="changeCurrentMonth('next')" >></button>
+		<button class="calendar-layout__month-year__button btn-standard">+</button>
+		<button class="calendar-layout__month-year__button btn-standard" (click)="changeCurrentMonth('previous')" ><</button>
+		<button class="calendar-layout__month-year__button btn-standard" (click)="changeCurrentMonth('next')" >></button>
 	</div>
 </div>
-<calendar-list [currentMonth]="getCurrentMonth('number') as number" [currentYear]="getCurrentYear()"></calendar-list>
+<calendar-list [currentMonth]="getCurrentMonth('number')" [currentYear]="getCurrentYear()"></calendar-list>
