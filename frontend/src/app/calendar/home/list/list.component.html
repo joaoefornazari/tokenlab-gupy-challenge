@@ -5,7 +5,7 @@
 		<ul>
 			<!-- Laço de repetição para eventos dentro do dia -->
 			<button class="list-add-event__button" (click)="startAddingEvent()">
-				Add new event...
+				<span>Add new event...</span>
 			</button>
 			<calendar-event-form *ngIf="isAddingEvent()"></calendar-event-form>
 			<li *ngFor="let event of day.events">
