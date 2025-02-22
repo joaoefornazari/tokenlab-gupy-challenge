@@ -1,19 +1,20 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { EventBadgeComponent } from './event-badge/event-badge.component';
 
 @Component({
   selector: 'calendar-list',
-  imports: [NgFor],
+  imports: [NgFor, EventBadgeComponent],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnChanges {
 	
-	@Input() currentMonth!: number
+	@Input() currentMonth!: number | string
 	@Input() currentYear!: number
 	
-	protected monthAmountOfDays: number = 0
-	protected listDays: { day: number, events: any }[] = []
+	private monthAmountOfDays: number = 0
+	private listDays: { day: number, events: any }[] = []
 
 	constructor() {}
 
@@ -23,12 +24,12 @@ export class ListComponent implements OnChanges {
 		}
 	}
 
-	updateMonthData() {
-		this.monthAmountOfDays = this.setMonthAmountOfDays(this.currentMonth);
+	public updateMonthData() {
+		this.monthAmountOfDays = this.setMonthAmountOfDays(Number(this.currentMonth));
     this.listDays = this.setListDays(this.monthAmountOfDays);
 	}
 
-	setMonthAmountOfDays(month: number) {
+	public setMonthAmountOfDays(month: number) {
 		if (
 			month === 0 || // janeiro
 			month === 2 || // março
@@ -49,15 +50,19 @@ export class ListComponent implements OnChanges {
 		return 30
 	}
 
-	isLeapYear(year: number) {
+	public isLeapYear(year: number) {
 		return year % 4 === 0
 	}
 
-	setListDays(amountOfDays: number) {
+	public setListDays(amountOfDays: number) {
 		const listDays: { day: number, events: any }[] = []
 		for (let i = 1; i <= amountOfDays; i++) {
 			listDays.push({ day: i, events: [] })
 		}
 		return listDays
+	}
+
+	public getListDays(): any[] {
+		return this.listDays
 	}
 }
