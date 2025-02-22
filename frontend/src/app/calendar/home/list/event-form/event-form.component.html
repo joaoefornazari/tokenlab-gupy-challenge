@@ -1,0 +1,15 @@
+<button class="add-event__button">
+	<span>Add new event...</span>
+</button>
+<div *ngIf="isAddingEvent()" class="event-badge expanded">
+	<div class="event-badge__header">
+		<div class="event-badge__summary">
+			<input type="text" id="event-description">
+			<input type="text" id="event-start">
+			<input type="text" id="event-end">
+		</div>
+	</div>
+	<p *ngIf="hasContent()" class="event-badge__content">
+		<textarea id="content"></textarea>
+	</p>
+</div>

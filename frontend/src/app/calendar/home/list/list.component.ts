@@ -69,16 +69,4 @@ export class ListComponent implements OnChanges {
 	public getListDays(): any[] {
 		return this.listDays
 	}
-
-	public isAddingEvent(): boolean {
-		return this.addingEvent
-	}
-
-	public startAddingEvent(): void {
-		this.addingEvent = true
-	}
-
-	public stopAddingEvent() {
-		this.addingEvent = false
-	}
 }

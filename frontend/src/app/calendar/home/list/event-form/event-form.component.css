@@ -1,0 +1,20 @@
+.add-event__button {
+	width: 100%;
+	height: 2rem;
+	text-align: left;
+	padding-left: 2rem;
+	border: none;
+	border-radius: 10px;
+}
+
+.add-event__button > span {
+	color: rgb(99, 99, 99);
+}
+
+.add-event__button:hover > span {
+	color: rgb(51, 51, 51);
+}
+
+.add-event__button:hover {
+	background-color: rgba(188, 188, 188, 0.5);
+}

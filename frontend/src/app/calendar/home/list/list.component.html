@@ -4,14 +4,11 @@
 		<h3>{{ day.day }}</h3>
 		<ul>
 			<!-- Laço de repetição para eventos dentro do dia -->
-			<button class="list-add-event__button" (click)="startAddingEvent()">
-				<span>Add new event...</span>
-			</button>
-			<calendar-event-form *ngIf="isAddingEvent()"></calendar-event-form>
 			<li *ngFor="let event of day.events">
 				<!-- Event description -->
 				<calendar-event-badge [event]="event"></calendar-event-badge>
 			</li>
+			<calendar-event-form></calendar-event-form>
 		</ul>
 		<hr>
 	</li>
