@@ -9,7 +9,7 @@ import { ListComponent as CalendarList } from './list/list.component';
 })
 export class HomeComponent {
 	private today = new Date()
-	protected current: Date
+	private current: Date
 
 	constructor() {
 		this.current = this.today
