@@ -27,8 +27,10 @@ export class HomeComponent {
 		return this.today.getFullYear()
 	}
 	
-	public getCurrentMonth() {
-		return this.current.toLocaleString('pt', { month: 'long' }).toUpperCase()
+	public getCurrentMonth(type: 'number' | 'name') {
+		return type === 'name' 
+			? this.current.toLocaleString('pt', { month: 'long' }).toUpperCase()
+			: this.current.getMonth()
 	}
 		
 	public getCurrentDay() {

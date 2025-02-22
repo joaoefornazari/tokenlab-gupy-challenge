@@ -1,6 +1,6 @@
 <div class="calendar-layout__month-year-container">
 	<h3 class="calendar-layout__month-year">
-		<span class="calendar-layout__month">{{ getCurrentMonth() }}</span>,
+		<span class="calendar-layout__month">{{ getCurrentMonth('name') }}</span>,
 		<span class="calendar-layout__year">{{ getCurrentYear() }}</span>
 	</h3>
 	<div class="calendar-layout__month-year__buttons">
@@ -9,4 +9,4 @@
 		<button class="calendar-layout__month-year__button" (click)="changeCurrentMonth('next')" >></button>
 	</div>
 </div>
-<calendar-list [currentMonth]="current.getMonth()" [currentYear]="getCurrentYear()"></calendar-list>
+<calendar-list [currentMonth]="getCurrentMonth('number') as number" [currentYear]="getCurrentYear()"></calendar-list>
