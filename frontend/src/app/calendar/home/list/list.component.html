@@ -1,0 +1,13 @@
+<ul>
+	<!-- Laço de repetição para lista de dias -->
+	<li *ngFor="let day of listDays">
+		<h3>{{ day.day }}</h3>
+		<ul>
+			<!-- Laço de repetição para eventos dentro do dia -->
+			<li *ngFor="let event of day.events">
+				<!-- Event description -->
+				{{ event.description }}
+			</li>
+			<hr>
+		</ul>
+</ul>
