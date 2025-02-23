@@ -1,12 +1,12 @@
 import { Component, Input, OnChanges, SimpleChanges, model, ModelSignal } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { EventBadgeComponent } from './event-badge/event-badge.component';
 import { DayInfo } from 'src/types';
 import { EventFormComponent } from './event-form/event-form.component';
 
 @Component({
   selector: 'calendar-list',
-  imports: [NgFor, NgIf, EventBadgeComponent, EventFormComponent],
+  imports: [NgFor, EventBadgeComponent, EventFormComponent],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
