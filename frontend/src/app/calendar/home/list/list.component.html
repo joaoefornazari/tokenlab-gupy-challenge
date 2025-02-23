@@ -6,10 +6,10 @@
 			<!-- Laço de repetição para eventos dentro do dia -->
 			<li *ngFor="let event of day.events">
 				<!-- Event description -->
-
 				<calendar-event-badge [event]="event"></calendar-event-badge>
 			</li>
-			<hr>
+			<calendar-event-form [day]="day" [year]="currentYear" [month]="getMonthAsNumber()"></calendar-event-form>
 		</ul>
+		<hr>
 	</li>
 </ul>
