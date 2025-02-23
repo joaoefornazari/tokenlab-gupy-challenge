@@ -18,8 +18,6 @@ export class ListComponent implements OnChanges {
 	private monthAmountOfDays: number = 0
 	private listDays: DayInfo[] = []
 
-	private addingEvent: boolean = false
-
 	constructor() {}
 
 	ngOnChanges(changes: SimpleChanges) {
