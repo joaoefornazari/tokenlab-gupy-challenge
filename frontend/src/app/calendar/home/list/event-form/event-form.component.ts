@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { CalendarEvent } from 'src/types';
 
 @Component({
     selector: 'calendar-event-form',
 		standalone: true,
+    imports: [NgIf],
     templateUrl: './event-form.component.html',
     styleUrls: ['./event-form.component.css'],
-    imports: [NgIf]
 })
 export class EventFormComponent {
     public event: CalendarEvent = {
@@ -16,6 +16,15 @@ export class EventFormComponent {
         end_datetime: '',
         content: ''
     };
+
+		@Input()
+		public day!: number
+		
+		@Input()
+		public month!: number
+
+		@Input()
+		public year!: number
 
     private addingEvent: boolean = false;
 
@@ -35,11 +44,30 @@ export class EventFormComponent {
     }
 
     public onSubmit(): void {
-        console.log(this.event);
-        // Handle form submission, e.g., send the payload to the server
+				this.event.start_datetime = this.convertToISOString(this.event.start_datetime)
+				this.event.end_datetime = this.convertToISOString(this.event.end_datetime)
+
+				// send to server
         this.addingEvent = false;
         this.resetForm();
     }
+
+		private convertToISOString(time: string): string {
+			const date = new Date()
+
+			date.setMonth(this.month)
+			date.setDate(this.day)
+			date.setFullYear(this.year)
+			
+			const [hours, minutes] = time.split(':').map(Number)
+
+			date.setHours(hours)
+			date.setMinutes(minutes)
+			date.setSeconds(0)
+			date.setMilliseconds(0)
+
+			return date.toISOString()
+		}
 
     public resetForm(): void {
 			this.event = {

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, model, ModelSignal } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { EventBadgeComponent } from './event-badge/event-badge.component';
 import { DayInfo } from 'src/types';
@@ -11,7 +11,6 @@ import { EventFormComponent } from './event-form/event-form.component';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnChanges {
-	
 	@Input() currentMonth!: number | string
 	@Input() currentYear!: number
 	
@@ -24,6 +23,10 @@ export class ListComponent implements OnChanges {
 		if (changes['currentMonth'] || changes['currentYear']) {
 			this.updateMonthData()
 		}
+	}
+
+	public getMonthAsNumber() {
+		return this.currentMonth as number
 	}
 
 	public updateMonthData() {
