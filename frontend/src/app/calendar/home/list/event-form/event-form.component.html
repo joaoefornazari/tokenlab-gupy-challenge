@@ -4,35 +4,35 @@
 	</button>
 	<div *ngIf="isAddingEvent()" class="event-form">
 			<h4>Adicionar Evento</h4>
-			<form>
+			<div class="form">
 					<div class="event-form__fields">
 						<div class="event-form__summary">
 								<fieldset id="description">
 										<label for="description">Descrição</label>
-										<input type="text" id="description" name="description" required>
+										<input type="text" id="description" [(ngModel)]="event.description" required>
 								</fieldset>
 								<fieldset>
 										<label for="start_datetime">Início</label>
-										<input type="time" id="start_datetime" name="start_datetime" required>
+										<input type="time" id="start_datetime" [(ngModel)]="event.start_datetime" required>
 								</fieldset>
 								<fieldset>
 										<label for="end_datetime">Fim</label>
-										<input type="time" id="end_datetime" name="end_datetime" required>
+										<input type="time" id="end_datetime" [(ngModel)]="event.end_datetime" required>
 								</fieldset>
 						</div>
 						<fieldset type="textarea">
 								<label for="content">Conteúdo</label>
-								<textarea id="content" name="content"></textarea>
+								<textarea id="content" name="content" [(ngModel)]="event.content"></textarea>
 						</fieldset>
 					</div>
 					<div class="event-form__buttons">
-							<button type="button" class="btn-standard cancel-event" (click)="cancelAddingEvent()">
+							<button class="btn-standard cancel-event" (click)="cancelAddingEvent()">
 								<span>CANCELAR</span>
 							</button>
-							<button type="submit" class="btn-standard save-event">
+							<button class="btn-standard save-event" (click)="onSubmit()">
 								<span>SALVAR</span>
 							</button>
 					</div>
-			</form>
+			</div>
 	</div>
 </div>
