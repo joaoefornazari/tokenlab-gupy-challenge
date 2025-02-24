@@ -3,6 +3,7 @@ import { NgFor } from '@angular/common';
 import { EventBadgeComponent } from './event-badge/event-badge.component';
 import { DayInfo } from 'src/types';
 import { EventFormComponent } from './event-form/event-form.component';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'calendar-list',
@@ -16,14 +17,17 @@ export class ListComponent implements OnChanges {
 	
 	private monthAmountOfDays: number = 0
 	private listDays: DayInfo[] = []
+	private api: ApiService
 
-	constructor() {}
+	constructor() {
+		this.api = new ApiService()
+	}
 
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['currentMonth'] && changes['currentYear']) {
 			this.monthAmountOfDays = this.setMonthAmountOfDays(Number(this.currentMonth));
 			this.listDays = this.setListDays(this.monthAmountOfDays);
-			// this.fetchEvents()
+			this.fetchEvents()
 		}
 	}
 
@@ -69,8 +73,6 @@ export class ListComponent implements OnChanges {
 	}
 
 	public fetchEvents() {
-		// this.eventService.getEvents().subscribe(response => {
-		// 	console.log(response)
-		// })
+		this.api.get('/calendar/events').then((response: any) => console.log(response))
 	}
 }

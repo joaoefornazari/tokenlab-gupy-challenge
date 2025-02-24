@@ -1,36 +1,42 @@
 import { Injectable } from '@angular/core'
 import { ApiInterface } from './api.interface';
-import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Axios } from 'axios';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService implements ApiInterface {
 	private apiConfig: Record<string, any> = {
-		responseType: 'json'
+		responseType: 'json',
+		baseURL: environment.apiUrl,
+		timeout: 5000,
+		timeoutErrorMessage: 'Error: Request timeout.'
 	}
 
-  constructor(private http: HttpClient) { }
+	private axios: Axios
+
+  constructor() {
+		this.axios = new Axios(this.getApiConfig())
+	}
 
 	private getApiConfig() {
 		return this.apiConfig
 	}
 
-	public get(url: string): Observable<Object> {
-		return this.http.get(`${environment.apiUrl}${url}`, this.getApiConfig())
+	public get(url: string): Promise<any> {
+		return this.axios.get(`${url}`)
 	}
 
-	public post(url: string, data: any): Observable<Object> {
-		return this.http.post(`${environment.apiUrl}${url}`, data, this.getApiConfig())
+	public post(url: string, data: any): Promise<any> {
+		return this.axios.post(`${url}`, data)
 	}
 
-	public put(url: string, data: any): Observable<Object> {
-		return this.http.put(`${environment.apiUrl}${url}`, data, this.getApiConfig())
+	public put(url: string, data: any): Promise<any> {
+		return this.axios.put(`${url}`, data)
 	}
 
-	public delete(url: string): Observable<Object> {
-		return this.http.delete(`${environment.apiUrl}${url}`, this.getApiConfig())
+	public delete(url: string): Promise<any> {
+		return this.axios.delete(`${url}`)
 	}
 }

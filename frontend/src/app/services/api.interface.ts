@@ -1,5 +1,3 @@
-import { Observable } from "rxjs"
-
 export interface ApiResponse {
 	status: {
 		message: string
@@ -12,8 +10,8 @@ export interface ApiResponse {
 }
 
 export interface ApiInterface {
-	get(url: string): Observable<Object>
-	post(url: string, data: any): Observable<Object>
-	put(url: string, data: any): Observable<Object>
-	delete(url: string): Observable<Object>
+	get(url: string): Promise<any>
+	post(url: string, data: any): Promise<any>
+	put(url: string, data: any): Promise<any>
+	delete(url: string): Promise<any>
 }
