@@ -20,18 +20,15 @@ export class ListComponent implements OnChanges {
 	constructor() {}
 
 	ngOnChanges(changes: SimpleChanges) {
-		if (changes['currentMonth'] || changes['currentYear']) {
-			this.updateMonthData()
+		if (changes['currentMonth'] && changes['currentYear']) {
+			this.monthAmountOfDays = this.setMonthAmountOfDays(Number(this.currentMonth));
+			this.listDays = this.setListDays(this.monthAmountOfDays);
+			// this.fetchEvents()
 		}
 	}
 
 	public getMonthAsNumber() {
 		return this.currentMonth as number
-	}
-
-	public updateMonthData() {
-		this.monthAmountOfDays = this.setMonthAmountOfDays(Number(this.currentMonth));
-    this.listDays = this.setListDays(this.monthAmountOfDays);
 	}
 
 	public setMonthAmountOfDays(month: number) {
@@ -69,5 +66,11 @@ export class ListComponent implements OnChanges {
 
 	public getListDays(): any[] {
 		return this.listDays
+	}
+
+	public fetchEvents() {
+		// this.eventService.getEvents().subscribe(response => {
+		// 	console.log(response)
+		// })
 	}
 }
