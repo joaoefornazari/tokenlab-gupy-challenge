@@ -34,6 +34,7 @@ ng serve
 
 - No seu navegador, acesse o endereço `http://localhost:4200` e você será redirecionado para o `home` do projeto.
 
-## DISCLAIMER
+## DISCLAIMERS
 
-Este projeto foi desenvolvido em um ambiente Windows 10 Home, sem o uso de Docker ou WSL, portanto, se você containeirizar o projeto ou rodá-lo no WSL, por favor entre em contato comigo caso aconteça algum problema que te responderei em prontidão.
+- Existem commits depois das 23:30 do dia 23/02/2025 porque, por mais que o texto do desafio expunha que o teste teria 7 dias de duração, o desafio mostrava um contador que nunca chegava a zerar, por mais que eu deixei por 5 dias aberto direto; e também tem a descrição da etapa na Gupy que diz que a duração da etapa seria 10080 minutos. Com base nisso, supus que o desafio duraria até dia 24/02/2025 às 12:30 minutos. Porém, como eu não queria deixar de enviar o link caso minha suposição estivesse errada e pensando no pior caso (que seria de a entrada da etapa fechar no domingo), eu resolvi enviar o link às 23:30 do dia 23/02/2025 e continuar programando as atividades restantes até o suposto horário de entrega do projeto.
+- Este projeto foi desenvolvido em um ambiente Windows 10 Home, sem o uso de Docker ou WSL, portanto, se você containeirizar o projeto ou rodá-lo no WSL, por favor entre em contato comigo caso aconteça algum problema que te responderei em prontidão.
