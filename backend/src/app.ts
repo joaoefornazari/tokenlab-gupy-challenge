@@ -11,6 +11,11 @@ import eventsRouter from './routes/events.ts';
 
 const app = Express();
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.header('Access-Control-Allow-Origin', '*');
+	next();
+});
 app.use(logger('dev'));
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: false }));

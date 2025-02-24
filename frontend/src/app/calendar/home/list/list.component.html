@@ -8,7 +8,12 @@
 				<!-- Event description -->
 				<calendar-event-badge [event]="event"></calendar-event-badge>
 			</li>
-			<calendar-event-form [day]="day" [year]="currentYear" [month]="getMonthAsNumber()"></calendar-event-form>
+			<calendar-event-form
+				[day]="day"
+				[year]="currentYear"
+				[month]="getMonthAsNumber()"
+				(eventCreated)="onEventCreated()"
+			></calendar-event-form>
 		</ul>
 		<hr>
 	</li>

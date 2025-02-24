@@ -27,7 +27,13 @@
 			</button>
 		</div>
 	</div>
-	<p *ngIf="hasContent()" class="event-badge__content">
-		{{ getContent() }}
-	</p>
+	@if (hasContent()) {
+		<p class="event-badge__content">
+			{{ getContent() }}
+		</p>
+	} @else {
+		<p class="event-badge__content">
+			No content to show.
+		</p>
+	}
 </div>

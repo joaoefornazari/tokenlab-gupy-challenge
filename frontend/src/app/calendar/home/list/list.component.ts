@@ -1,8 +1,9 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { EventBadgeComponent } from './event-badge/event-badge.component';
-import { DayInfo } from 'src/types';
+import { CalendarEvent, DayInfo } from 'src/types';
 import { EventFormComponent } from './event-form/event-form.component';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'calendar-list',
@@ -16,22 +17,22 @@ export class ListComponent implements OnChanges {
 	
 	private monthAmountOfDays: number = 0
 	private listDays: DayInfo[] = []
+	private api: ApiService
 
-	constructor() {}
+	constructor() {
+		this.api = new ApiService()
+	}
 
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['currentMonth'] || changes['currentYear']) {
-			this.updateMonthData()
+			this.monthAmountOfDays = this.setMonthAmountOfDays(Number(this.currentMonth));
+			this.listDays = this.initializeListDays(this.monthAmountOfDays);
+			this.fetchEvents()
 		}
 	}
 
 	public getMonthAsNumber() {
 		return this.currentMonth as number
-	}
-
-	public updateMonthData() {
-		this.monthAmountOfDays = this.setMonthAmountOfDays(Number(this.currentMonth));
-    this.listDays = this.setListDays(this.monthAmountOfDays);
 	}
 
 	public setMonthAmountOfDays(month: number) {
@@ -59,7 +60,7 @@ export class ListComponent implements OnChanges {
 		return year % 4 === 0
 	}
 
-	public setListDays(amountOfDays: number) {
+	public initializeListDays(amountOfDays: number) {
 		const listDays: DayInfo[] = []
 		for (let i = 1; i <= amountOfDays; i++) {
 			listDays.push({ day: i, events: [] })
@@ -69,5 +70,29 @@ export class ListComponent implements OnChanges {
 
 	public getListDays(): any[] {
 		return this.listDays
+	}
+
+	private getEventDay(event: string): number {
+		const date = new Date(event)
+		return date.getDate()
+	}
+
+	private getEventMonth(event: string): number {
+		const date = new Date(event)
+		return date.getMonth()
+	}
+
+	public async fetchEvents() {
+		const { value: { data: response } } = await this.api.get('/calendar/events')
+		response.forEach((event: CalendarEvent) => {
+			const eventDay = this.getEventDay(event.start_datetime)
+			if (this.currentMonth === this.getEventMonth(event.start_datetime)) {
+				this.listDays[eventDay - 1].events.push(event)
+			}
+		})
+	}
+
+	public onEventCreated(): void {
+		this.fetchEvents()
 	}
 }
