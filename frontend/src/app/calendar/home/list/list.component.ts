@@ -91,4 +91,8 @@ export class ListComponent implements OnChanges {
 			}
 		})
 	}
+
+	public onEventCreated(): void {
+		this.fetchEvents()
+	}
 }
