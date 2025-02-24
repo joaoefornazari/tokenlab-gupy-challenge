@@ -24,19 +24,31 @@ export class ApiService implements ApiInterface {
 		return this.apiConfig
 	}
 
-	public get(url: string): Promise<any> {
-		return this.axios.get(`${url}`)
+	public options(url: string): Promise<any> {
+		return this.axios.options(url)
 	}
 
-	public post(url: string, data: any): Promise<any> {
-		return this.axios.post(`${url}`, data)
+	public async get(url: string): Promise<any> {
+		return this.options(url).then(() => {
+			return this.axios.get(url)
+		})
 	}
 
-	public put(url: string, data: any): Promise<any> {
-		return this.axios.put(`${url}`, data)
+	public async post(url: string, data: any): Promise<any> {
+		return this.options(url).then(() => {
+			return this.axios.post(url, data)
+		})
 	}
 
-	public delete(url: string): Promise<any> {
-		return this.axios.delete(`${url}`)
+	public async put(url: string, data: any): Promise<any> {
+		return this.options(url).then(() => {
+			return this.axios.put(url, data)
+		})
+	}
+
+	public async delete(url: string): Promise<any> {
+		return this.options(url).then(() => {
+			return this.axios.delete(url)
+		})
 	}
 }
