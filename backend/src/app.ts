@@ -11,7 +11,12 @@ import eventsRouter from './routes/events.ts';
 
 const app = Express();
 
-app.use(logger('dev'));
+app.use(function (req, res, next) {
+	res.setHeader('Access-Control-Allow-Credentials', 'true')
+	res.setHeader('Access-Control-Allow-Origin', ['http://localhost:3000', 'http://localhost:4200'])
+	next()
+})
+app.use(logger('dev'))
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: false }));
 app.use(cookieParser());
