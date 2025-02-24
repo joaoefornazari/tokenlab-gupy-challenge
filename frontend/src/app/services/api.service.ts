@@ -33,22 +33,18 @@ export class ApiService implements ApiInterface {
 	}
 
 	public async get(url: string): Promise<any> {
-		await Promise.allSettled([this.options(url), this.axios.get(url)]);
-		return this.axios.get(url);
-}
+		return await Promise.allSettled([this.options(url), this.axios.get(url)]);
+	}
 
-public async post(url: string, data: any): Promise<any> {
-		await this.options(url);
-		return this.axios.post(url, data);
-}
+	public async post(url: string, data: any): Promise<any> {
+		return await Promise.allSettled([this.options(url), this.axios.post(url, data)]);
+	}
 
-public async put(url: string, data: any): Promise<any> {
-		await this.options(url);
-		return this.axios.put(url, data);
-}
+	public async put(url: string, data: any): Promise<any> {
+		return await Promise.allSettled([this.options(url), this.axios.put(url, data)]);
+	}
 
-public async delete(url: string): Promise<any> {
-		await this.options(url);
-		return this.axios.delete(url);
-}
+	public async delete(url: string): Promise<any> {
+		return await Promise.allSettled([this.options(url), this.axios.delete(url)]);
+	}
 }
