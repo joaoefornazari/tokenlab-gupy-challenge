@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { ListComponent as CalendarList } from './list/list.component';
+import { EventListComponent } from './event-list/event-list.component'
 
 @Component({
-  selector: 'app-home',
-  imports: [CalendarList],
+  selector: 'calendar-home',
+  imports: [EventListComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
