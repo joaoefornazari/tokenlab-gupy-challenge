@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { EventListComponent } from './event-list/event-list.component'
 
 @Component({
   selector: 'calendar-home',
+	standalone: true,
   imports: [EventListComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
@@ -20,7 +21,7 @@ export class HomeComponent {
 	}
 
 	public getTodayDay(): number {
-		return this.today.getDay()
+		return this.today.getDate()
 	}
 
 	public getTodayYear(): number {

@@ -1,0 +1,34 @@
+<div class="event-form">
+	<h4>{{ mode === 'add' ? 'Adicionar Evento' : 'Editar Evento' }}</h4>
+	<div class="form">
+		<div class="event-form__fields">
+			<div class="event-form__summary">
+				<fieldset id="description">
+					<label for="description">Descrição</label>
+					<input type="text" id="description" [(ngModel)]="formData.description" required>
+				</fieldset>
+				<fieldset>
+					<label for="start_datetime">Início</label>
+					<input type="time" id="start_datetime" [(ngModel)]="formData.start" required>
+				</fieldset>
+				<fieldset>
+					<label for="end_datetime">Fim</label>
+					<input type="time" id="end_datetime" [(ngModel)]="formData.end" required>
+				</fieldset>
+			</div>
+				<fieldset type="textarea">
+					<label for="content">Conteúdo</label>
+					<textarea id="content" name="content" [(ngModel)]="formData.content"></textarea>
+				</fieldset>
+			</div>
+			<div class="event-form__buttons">
+				<button class="btn-standard cancel-event" (click)="cancelAddingEvent()">
+					<span>CANCELAR</span>
+				</button>
+				<button class="btn-standard save-event" (click)="onSubmit()">
+					<span>SALVAR</span>
+				</button>
+			</div>
+		</div>
+</div>
+
