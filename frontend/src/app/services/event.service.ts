@@ -100,7 +100,7 @@ export class EventService implements EventServiceInterface {
 	}
 
 	private getTimeString(date: Date): string {
-		const hours = date.getHours() > 9 ? `0${date.getHours()}` : `${date.getHours()}`
+		const hours = date.getHours() <= 9 ? `0${date.getHours()}` : `${date.getHours()}`
 		const minutes = date.getMinutes()
 
 		return `${hours}:${minutes}`
