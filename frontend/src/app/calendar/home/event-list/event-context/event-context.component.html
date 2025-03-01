@@ -1,11 +1,11 @@
 <h3>{{ day }}</h3>
 @if (currentAction === 'read') {
-<add-event-prompt (startAdd)="onStartAdd()" ></add-event-prompt>
+	<add-event-prompt (startAdd)="onStartAdd()"></add-event-prompt>
 	@for (event of events; track event.id) {
 		<event-badge
 			[event]="event"
-			(startDelete)="onStartDelete"
-			(startEdit)="onStartEdit"
+			(startDelete)="onStartDelete($event)"
+			(startEdit)="onStartEdit($event)"
 		></event-badge>
 	}
 }
@@ -20,4 +20,3 @@
 @if (currentAction === 'delete') {
 	<event-delete-confirm [eventId]="getEventId()"></event-delete-confirm>
 }
-

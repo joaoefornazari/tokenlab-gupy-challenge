@@ -1,0 +1,21 @@
+ul {
+	list-style-type: none;
+	width: 100%;
+}
+
+li {
+	padding-top: 1rem;
+}
+
+hr {
+	margin-top: 2rem;
+}
+
+.event-context {
+	display: flex;
+	flex-flow: column;
+	align-items: flex-start;
+
+	padding: 1rem;
+	gap: 1rem;
+}
