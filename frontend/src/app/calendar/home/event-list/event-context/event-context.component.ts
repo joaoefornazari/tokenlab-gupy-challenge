@@ -70,13 +70,7 @@ export class EventContextComponent {
 
 	// volta para modo leitura e pede para a lista recarregar os eventos
 	public onActionFinished() {
-		this.eventService.setEventProps({
-			start_datetime: '',
-			end_datetime: '',
-			description: '',
-			content: '',
-			id: 0,
-		})
+        this.eventService.resetEventData()
 		this.changeCurrentAction('read')
 		this.eventListChanged.emit()
 	}

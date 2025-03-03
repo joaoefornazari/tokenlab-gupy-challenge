@@ -11,7 +11,7 @@
 }
 @if (currentAction === 'add' || currentAction === 'edit') {
 	@if (getEventId() !== 1) {
-		<event-form [event]="getEventData()"></event-form>
+		<event-form [event]="getEventData()" (saveEvent)="onActionFinished()" (cancelEvent)="onActionFinished()" ></event-form>
 	} @else {
 		<event-form></event-form>
 	}
