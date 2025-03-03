@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 import { EventService } from 'src/app/services/event.service'
 import { ApiService } from 'src/app/services/api.service'
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'
 
 @Component({
   selector: 'event-form',
@@ -28,6 +28,9 @@ export class EventFormComponent implements OnChanges {
 	@Output()
 	public saveEvent = new EventEmitter<void>()
 
+	@Output()
+	public cancelEvent = new EventEmitter<void>()
+
 	constructor() {
 		this.api = new ApiService()
 		this.mode = 'add'
@@ -46,13 +49,32 @@ export class EventFormComponent implements OnChanges {
 	}
 
 	private setFormData(event: EventService) {
-		this.formData.start = this.event.getEventProp('start')
-		this.formData.end = this.event.getEventProp('end')
+		this.formData.start = this.getDatetimeString(this.event.getEventProp('start'))
+		this.formData.end = this.getDatetimeString(this.event.getEventProp('end'))
 		this.formData.description = this.event.getEventProp('description')
 		this.formData.content = this.event.getEventProp('content')
 	}
 
+	private getDatetimeString(datetime: string): string {
+		const date = new Date(datetime)
+		const prependZero = (value: number) => {
+			return value < 10 ? `0${value}` : value.toString()
+		}
+		const dateInfo = {
+			day: prependZero(date.getDate()),
+			month: prependZero(date.getDate()),
+			year: date.getFullYear(),
+			hours: prependZero(date.getHours()), 
+			minutes: prependZero(date.getMinutes()),
+		}
+
+		return `${dateInfo.year}-${dateInfo.month}-${dateInfo.day}T${dateInfo.hours}:${dateInfo.minutes}`
+	}
+
 	private sendFormData(): Promise<any> {
+		this.formData.start = new Date(this.formData.start).toISOString()
+		this.formData.end = new Date(this.formData.end).toISOString()
+
 		if (this.mode === 'edit') {
 			return this.api.put(`/calendar/events/${this.event.getEventProp('id')}`, this.formData)
 		}
@@ -71,6 +93,7 @@ export class EventFormComponent implements OnChanges {
 	}
 
 	public cancelAddingEvent() {
+        this.cancelEvent.emit()
 		this.formData = this.resetForm()
 	}
 

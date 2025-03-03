@@ -20,16 +20,17 @@ export class EventService implements EventServiceInterface {
 	constructor() {}
 
 	public setEventProps(event: CalendarEvent): void {
-		const date = new Date(event.start_datetime)
+		const startDate = new Date(event.start_datetime)
+		const endDate = new Date(event.end_datetime)
 		
 		if (event.id) this.id = event.id
 
-		this.day = date.getDate()
-		this.month = date.getMonth()
-		this.year = date.getFullYear()
+		this.day = startDate.getDate()
+		this.month = startDate.getMonth()
+		this.year = startDate.getFullYear()
 
-		this.start = this.getTimeString(date)
-		this.end = this.getTimeString(new Date(event.end_datetime))
+		this.start = startDate.toISOString()
+		this.end = endDate.toISOString()
 
 		this.description = event.description
 		if (event.content) this.content = event.content
@@ -81,23 +82,23 @@ export class EventService implements EventServiceInterface {
 			id: this.id,
 			description: this.description,
 			content: this.content,
-			start_datetime: this.getISODateString(this.start),
-			end_datetime: this.getISODateString(this.end),
+			start_datetime: this.start,
+			end_datetime: this.end,
 		}
 	}
 
-	private getISODateString(time: string): string {
-		const date = new Date()
-		date.setDate(this.day)
-		date.setMonth(this.month)
-		date.setFullYear(this.year)
+    public resetEventData(): void {
+        this.id = 0,
+        this.start = ''
+        this.end = ''
 
-		const [hours, minutes] = time.split(':').map(Number)
-		date.setHours(hours)
-		date.setMinutes(minutes)
+        this.day = 1
+        this.month = 0
+        this.year = 1970
 
-		return date.toISOString()
-	}
+        this.description = ''
+        this.content = ''
+    }
 
 	private getTimeString(date: Date): string {
 		const hours = date.getHours() <= 9 ? `0${date.getHours()}` : `${date.getHours()}`
