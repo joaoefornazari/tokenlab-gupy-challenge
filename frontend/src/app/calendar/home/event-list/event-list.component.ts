@@ -70,6 +70,7 @@ export class EventListComponent implements OnChanges {
 
 	public async fetchEvents() {
 		const { value: { data: response } } = await this.api.get('/calendar/events')
+        this.days = this.initDays(this.maxDays)
 		response.forEach((event: CalendarEvent) => {
 			const day = new Date(event.start_datetime).getDate()
 			if (
