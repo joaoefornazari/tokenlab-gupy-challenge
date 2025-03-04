@@ -79,9 +79,6 @@ export class EventFormComponent implements OnChanges {
       end_datetime: new Date(this.formData.end).toISOString()
     }
 
-    payload.start_datetime = new Date(this.formData.start).toISOString()
-		payload.end_datetime = new Date(this.formData.end).toISOString()
-
 		if (this.mode === 'edit') {
 			return this.api.put(`/calendar/events/${this.event.getEventProp('id')}`, payload)
 		}
