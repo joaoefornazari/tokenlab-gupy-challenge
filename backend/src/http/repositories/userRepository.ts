@@ -59,16 +59,19 @@ class UserRepository implements UserRepositoryInterface {
 			});
 
 			if (!user) {
-				throw new Error('Not found.')
+				throw new Error('Not found.', { cause: { code: 404 } })
 			}
 
 			const isPasswordValid = await compare(password, user.get().password);
 
 			if (!isPasswordValid) {
-				throw new Error('Wrong password. Try again.');
+				throw new Error('Wrong password. Try again.', { cause: { code: 400 }});
 			}
 
-			return user ? user.toJSON() : null;
+			const response = user ? user.toJSON() : null;
+			delete response.id;
+			return response;
+
 		} catch (error) {
 			throw new Error(`Failed to get user by credentials: ${error}`);
 		}
