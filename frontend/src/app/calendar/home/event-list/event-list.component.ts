@@ -74,7 +74,8 @@ export class EventListComponent implements OnChanges {
 		response.forEach((event: CalendarEvent) => {
 			const day = new Date(event.start_datetime).getDate()
 			if (
-				this.currentMonth === new Date(event.start_datetime).getMonth() 
+				this.currentMonth === new Date(event.start_datetime).getMonth() &&
+        this.currentYear === new Date(event.start_datetime).getFullYear()
 			) {
 				this.days[day - 1].events.push(event)
 			}

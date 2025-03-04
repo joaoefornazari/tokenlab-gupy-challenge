@@ -4,6 +4,7 @@
 			class="event-context"
 			[day]="day.day" 
 			[month]="getMonthAsNumber()"
+      [year]="currentYear"
 			[events]="day.events"
 			(eventListChanged)="fetchEvents()"
 		></event-context>
