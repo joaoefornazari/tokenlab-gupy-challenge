@@ -1,5 +1,6 @@
 import { UserRepositoryInterface } from "../interfaces/userRepositoryInterface.ts";
 import User from "../models/user.ts";
+import { compare } from "bcrypt";
 
 class UserRepository implements UserRepositoryInterface {
 
@@ -42,6 +43,35 @@ class UserRepository implements UserRepositoryInterface {
 			});
 		} catch (error) {
 			throw new Error(`Failed to delete user: ${error}`);
+		}
+	}
+
+	/**
+	 * Get an user through its credentials.
+	 * @param email The user email
+	 * @param password The user password
+	 */
+	async getByCredentials(email: string, password: string) {
+		try {
+			const user = await User.findOne({
+				where: {
+					email: email,
+				}
+			});
+
+			if (!user) {
+				throw new Error('Not found.')
+			}
+
+			const isPasswordValid = await compare(password, user.get().password);
+
+			if (!isPasswordValid) {
+				throw new Error('Wrong password. Try again.');
+			}
+
+			return user ? user.toJSON() : null;
+		} catch (error) {
+			throw new Error(`Failed to get user by credentials: ${error}`);
 		}
 	}
 }

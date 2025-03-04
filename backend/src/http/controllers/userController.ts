@@ -31,6 +31,14 @@ class UserController {
 			res.status(500).json({ error: error.message });
 		}
 	}
+
+	async login(req: Request, res: Response) {
+		try {
+			await userService.getUserToLogin(req.body)
+		} catch (error: any) {
+			res.status(500).json({ error: error.message })
+		}
+	}
 }
 
 export default new UserController;

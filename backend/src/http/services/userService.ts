@@ -27,7 +27,7 @@ export default class UserService {
 		}
 
 		if (!this.isValidEmail(user.email)) {
-			throw new Error('Invalid email');
+			throw new Error('Invalid email.');
 		}
 
 		const hashedPassword = await hash(user.password, SALTROUND);
@@ -39,6 +39,26 @@ export default class UserService {
 	async deleteUser(id: string) {
 		return this.userRepository.delete(id);
 	}
+
+	async getUserToLogin(credentials: { email: string, password: string }) {
+		if (
+			credentials.email.length < 1 ||
+			credentials.password.length < 12
+		) {
+			throw new Error('Invalid login payload. Check fields again.');
+		}
+
+		if (!this.isValidEmail(credentials.email)) {
+			throw new Error('Invalid email.')
+		}
+
+		return this.userRepository.getByCredentials(credentials.email, credentials.password)
+	}
+
+
+	/* ************************************
+		HELPERS
+	* *************************************/
 
 	private isValidEmail(email: string): boolean {
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
