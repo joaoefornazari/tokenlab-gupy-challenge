@@ -2,7 +2,7 @@
 import { DataTypes } from "sequelize";
 
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
+const createUserEventTableMigration = {
   async up (queryInterface, Sequelize) {
     /**
      * Add altering commands here.
@@ -12,7 +12,7 @@ module.exports = {
      */
 		await queryInterface.createTable('user-event', {
 			userId: {
-				type: DataTypes.INTEGER,
+				type: DataTypes.UUID,
 				allowNull: false,
 				references: {
 					model: 'Users',
@@ -37,6 +37,8 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-		await queryInterface.dropTable('user-event');
+	await queryInterface.dropTable('user-event');
   }
 };
+export default createUserEventTableMigration;
+
