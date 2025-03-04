@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import UserRepository from '../repositories/userRepository.ts';
 import { hash } from 'bcrypt';
 
@@ -17,21 +18,24 @@ export default class UserService {
 	async createUser(user: any) {
 		if (
 			!user.email ||
-			!user.password
+			!user.password ||
+			!user.name
 		) {
-			throw new Error('Invalid user payload. Check fields again.');
+			throw new Error('Invalid user payload. Check fields again.', { cause: { code: 400 } });
 		}
 
 		if (user.password.length < 12) {
-			throw new Error('Password must be at least 12 characters long.');
+			throw new Error('Password must be at least 12 characters long.', { cause: { code: 400 } });
 		}
 
 		if (!this.isValidEmail(user.email)) {
-			throw new Error('Invalid email.');
+			throw new Error('Invalid email.', { cause: { code: 400 } });
 		}
 
 		const hashedPassword = await hash(user.password, SALTROUND);
 		user.password = hashedPassword;
+
+    Object.assign(user, { id: randomUUID() })
 
 		return this.userRepository.create(user);	
 	}
@@ -45,11 +49,11 @@ export default class UserService {
 			credentials.email.length < 1 ||
 			credentials.password.length < 12
 		) {
-			throw new Error('Invalid login payload. Check fields again.');
+			throw new Error('Invalid login payload. Check fields again.', { cause: { code: 400 } });
 		}
 
 		if (!this.isValidEmail(credentials.email)) {
-			throw new Error('Invalid email.')
+			throw new Error('Invalid email.', { cause: { code: 400 } })
 		}
 
 		return this.userRepository.getByCredentials(credentials.email, credentials.password)
