@@ -30,6 +30,9 @@ export class EventContextComponent {
 	@Input()
 	public month!: number
 
+  @Input()
+  public year!: number
+
 	@Input()
 	public events!: CalendarEvent[]
 
@@ -40,6 +43,9 @@ export class EventContextComponent {
 
 	constructor() {
 		this.eventService = new EventService()
+    this.eventService.setEventProp('day', this.day)
+    this.eventService.setEventProp('month', this.month)
+    this.eventService.setEventProp('year', this.year)
 	}
 
 	// lista de eventos ativados pelos componentes-filhos

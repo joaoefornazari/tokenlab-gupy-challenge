@@ -13,8 +13,17 @@ import { FormsModule } from '@angular/forms'
 export class EventFormComponent implements OnChanges {
 	@Input()
 	public event!: EventService
+  
+  @Input()
+  public day!: number
 
-	public formData: {
+  @Input()
+  public month!: number
+
+  @Input()
+  public year!: number
+
+	public formData!: {
 		start: string
 		end: string
 		description: string
@@ -39,20 +48,22 @@ export class EventFormComponent implements OnChanges {
 
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['event']) {
-			if (this.event.getEventProp('id') !== 0) {
-				this.setFormData(this.event)
-				this.mode = 'edit'
-			} else {
-				this.mode = 'add'
-			}
+      if (this.event.getEventProp('id') > -1) {
+        this.mode = 'edit'
+      } else {
+        this.mode = 'add'
+      }
+      this.setFormData(this.event)
 		}
 	}
 
 	private setFormData(event: EventService) {
-		this.formData.start = this.getDatetimeString(this.event.getEventProp('start'))
-		this.formData.end = this.getDatetimeString(this.event.getEventProp('end'))
-		this.formData.description = this.event.getEventProp('description')
-		this.formData.content = this.event.getEventProp('content')
+    const evt = this.event
+
+		this.formData.start = this.getDatetimeString(evt.getEventProp('start'))
+		this.formData.end = this.getDatetimeString(evt.getEventProp('end'))
+		this.formData.description = evt.getEventProp('description')
+		this.formData.content = evt.getEventProp('content')
 	}
 
 	private getDatetimeString(datetime: string): string {
@@ -104,7 +115,7 @@ export class EventFormComponent implements OnChanges {
 	private resetForm() {
 		return {
 			start: '',
-			end: '',
+      end: '',
 			description: '',
 			content: ''
 		}
