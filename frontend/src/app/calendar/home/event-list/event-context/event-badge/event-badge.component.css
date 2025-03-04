@@ -4,13 +4,13 @@
 
 .event-badge {
 	display: flex;
-	flex-flow: row;
-	align-items: center;
-	justify-content: space-between;
+	flex-flow: column;
+	align-items: flex-start;
 	padding: .2rem .4rem .2rem 1rem;
 	background-color: rgb(129, 184, 239);
 	border-radius: 10px;
 	width: 100%;
+  gap: 1rem;
 }
 
 .event-badge__summary {
@@ -26,13 +26,6 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-}
-
-.event-badge.expanded {
-	flex-flow: column !important;
-	align-items: start !important;
-	justify-content: start !important;
-	gap: 1rem;
 }
 
 .event-badge:hover {
@@ -55,3 +48,4 @@
 .event-badge__content {
 	margin-bottom: 1rem;
 }
+
