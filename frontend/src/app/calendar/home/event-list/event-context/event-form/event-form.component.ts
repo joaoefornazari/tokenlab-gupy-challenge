@@ -73,7 +73,7 @@ export class EventFormComponent implements OnChanges {
 		}
 		const dateInfo = {
 			day: prependZero(date.getDate()),
-			month: prependZero(date.getDate()),
+			month: prependZero(date.getMonth() + 1),
 			year: date.getFullYear(),
 			hours: prependZero(date.getHours()), 
 			minutes: prependZero(date.getMinutes()),
@@ -90,7 +90,9 @@ export class EventFormComponent implements OnChanges {
       end_datetime: new Date(this.formData.end).toISOString()
     }
 
-		if (this.mode === 'edit') {
+    console.log(payload)
+
+    if (this.mode === 'edit') {
 			return this.api.put(`/calendar/events/${this.event.getEventProp('id')}`, payload)
 		}
 		return this.api.post('/calendar/events', payload)
