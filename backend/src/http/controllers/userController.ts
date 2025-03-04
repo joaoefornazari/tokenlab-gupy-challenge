@@ -33,12 +33,13 @@ class UserController {
 	}
 
 	async login(req: Request, res: Response) {
-		try {
-			await userService.getUserToLogin(req.body)
-		} catch (error: any) {
-			res.status(500).json({ error: error.message })
-		}
-	}
+    try {
+			const user = await userService.getUserToLogin(req.body);
+			res.status(200).json({ message: 'Login successful', user });
+    } catch (error: any) {
+			res.status(error?.cause?.code ? error.cause.code : 500).json({ error: error.message });
+    }
+}
 }
 
 export default new UserController;
