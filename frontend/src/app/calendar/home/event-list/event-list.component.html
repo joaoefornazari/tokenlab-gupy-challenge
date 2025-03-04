@@ -1,0 +1,11 @@
+<ul>
+	@for (day of days; track day.day) {
+		<event-context
+			class="event-context"
+			[day]="day.day" 
+			[month]="getMonthAsNumber()"
+			[events]="day.events"
+			(eventListChanged)="fetchEvents()"
+		></event-context>
+	}
+</ul>

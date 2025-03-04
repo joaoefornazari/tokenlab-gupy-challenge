@@ -1,0 +1,22 @@
+<div class="event-badge" (click)="toggleExpanded()">
+	<div class="event-badge__header">
+		<div class="event-badge__summary">
+			<h4>{{ event.description }}</h4>
+			<span>{{ getStart() }} - {{ getEnd() }}</span>
+		</div>
+		<div>
+			<button class="event-badge__button" (click)="startEditingEvent()">
+				✏
+			</button>
+			<button class="event-badge__button" (click)="startDeletingEvent()">
+				🗑
+			</button>
+		</div>
+	</div>
+	@if (isExpanded()) {
+		<p class="event-badge__content">
+			{{ getContent() }}
+		</p>
+	}
+</div>
+

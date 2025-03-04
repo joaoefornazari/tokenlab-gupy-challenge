@@ -1,0 +1,22 @@
+<h3>{{ day }}</h3>
+@if (currentAction === 'read') {
+	<add-event-prompt (startAdd)="onStartAdd()"></add-event-prompt>
+	@for (event of events; track event.id) {
+		<event-badge
+			[event]="event"
+			(startDelete)="onStartDelete($event)"
+			(startEdit)="onStartEdit($event)"
+		></event-badge>
+	}
+}
+@if (currentAction === 'add' || currentAction === 'edit') {
+	@if (getEventId() !== 1) {
+		<event-form [event]="getEventData()" (saveEvent)="onActionFinished()" (cancelEvent)="onActionFinished()" ></event-form>
+	} @else {
+		<event-form></event-form>
+	}
+}
+
+@if (currentAction === 'delete') {
+	<event-delete-confirm [eventId]="getEventId()"></event-delete-confirm>
+}

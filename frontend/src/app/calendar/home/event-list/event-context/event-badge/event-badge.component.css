@@ -1,3 +1,7 @@
+:host {
+	width: 100%;
+}
+
 .event-badge {
 	display: flex;
 	flex-flow: row;
@@ -6,6 +10,7 @@
 	padding: .2rem .4rem .2rem 1rem;
 	background-color: rgb(129, 184, 239);
 	border-radius: 10px;
+	width: 100%;
 }
 
 .event-badge__summary {
