@@ -5,16 +5,15 @@ import { compare } from "bcrypt";
 class UserRepository implements UserRepositoryInterface {
 
 	/**
-	 * Get a specific user.
-	 * @param id The user id.
-	 * @returns The user data.
+	 * Get all stored users.
+	 * @returns The users list..
 	 */
-	async get(id: string): Promise<any | null> {
+	async get(): Promise<any | null> {
 		try {
-			const user = await User.findByPk(id);
-			return user ? user.toJSON() : null;
+			const users = await User.findAll()
+			return users.map(user => user.toJSON());
 		} catch (error) {
-			throw new Error(`Failed to get user by id: ${error}`);
+			throw new Error(`Failed to get users: ${error}`);
 		}
 	}
 

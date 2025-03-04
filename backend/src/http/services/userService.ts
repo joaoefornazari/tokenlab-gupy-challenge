@@ -10,8 +10,8 @@ export default class UserService {
 		this.userRepository = userRepository;
 	}
 
-	async getUser(id: string) {
-		return this.userRepository.get(id);
+	async getAllUsers() {
+		return this.userRepository.get();
 	}
 
 	async createUser(user: any) {
