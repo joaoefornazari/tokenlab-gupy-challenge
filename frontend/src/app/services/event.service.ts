@@ -6,7 +6,7 @@ import { CalendarEvent, EventProp } from 'src/types'
   providedIn: 'root'
 })
 export class EventService implements EventServiceInterface {
-	private id: number = 0
+	private id: number = -1
 	day: number = 1
 	month: number = 0
 	year: number = 1970
@@ -87,23 +87,17 @@ export class EventService implements EventServiceInterface {
 		}
 	}
 
-    public resetEventData(): void {
-        this.id = 0,
-        this.start = ''
-        this.end = ''
+  public resetEventData(): void {
+    this.id = 0,
+    this.start = ''
+    this.end = ''
 
-        this.day = 1
-        this.month = 0
-        this.year = 1970
+    this.day = 1
+    this.month = 0
+    this.year = 1970
 
-        this.description = ''
-        this.content = ''
-    }
+    this.description = ''
+    this.content = ''
+  }
 
-	private getTimeString(date: Date): string {
-		const hours = date.getHours() <= 9 ? `0${date.getHours()}` : `${date.getHours()}`
-		const minutes = date.getMinutes()
-
-		return `${hours}:${minutes}`
-	}
 }
