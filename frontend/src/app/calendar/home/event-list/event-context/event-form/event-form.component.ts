@@ -72,13 +72,20 @@ export class EventFormComponent implements OnChanges {
 	}
 
 	private sendFormData(): Promise<any> {
-		this.formData.start = new Date(this.formData.start).toISOString()
-		this.formData.end = new Date(this.formData.end).toISOString()
+    const payload = {
+      content: this.formData.content,
+      description: this.formData.description,
+      start_datetime: new Date(this.formData.start).toISOString(),
+      end_datetime: new Date(this.formData.end).toISOString()
+    }
+
+    payload.start_datetime = new Date(this.formData.start).toISOString()
+		payload.end_datetime = new Date(this.formData.end).toISOString()
 
 		if (this.mode === 'edit') {
-			return this.api.put(`/calendar/events/${this.event.getEventProp('id')}`, this.formData)
+			return this.api.put(`/calendar/events/${this.event.getEventProp('id')}`, payload)
 		}
-		return this.api.post('/calendar/events', this.formData)
+		return this.api.post('/calendar/events', payload)
 	}
 
 	public onSubmit() {
@@ -93,7 +100,7 @@ export class EventFormComponent implements OnChanges {
 	}
 
 	public cancelAddingEvent() {
-        this.cancelEvent.emit()
+    this.cancelEvent.emit()
 		this.formData = this.resetForm()
 	}
 
