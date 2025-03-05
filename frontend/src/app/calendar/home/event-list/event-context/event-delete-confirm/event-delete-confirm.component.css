@@ -1,0 +1,40 @@
+:host {
+	width: 100%;
+}
+
+.delete-event__dialog {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: .2rem .4rem .2rem 1rem;
+	background-color: rgb(239, 129, 129);
+	border-radius: 10px;
+	width: 100%;
+  gap: 1rem;
+}
+
+.delete-event__buttons > button {
+	border-radius: 5px;
+	font-size: .8rem;
+	width: 3rem;
+	border: none;
+	padding: .2rem !important;
+}
+
+.delete-event__cancel {	
+	background-color: transparent;
+}
+
+.delete-event__cancel:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.delete-event__confirm {
+	background-color: rgb(242, 40, 40);
+	color: #f0f0f0;
+}
+
+.delete-event__confirm:hover {
+	background-color: rgb(187, 37, 37);
+}
