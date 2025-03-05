@@ -1,6 +1,4 @@
-'use strict';
-
-const { DataTypes } = require('sequelize');
+import { DataTypes } from 'sequelize';
 
 /** @type {import('sequelize-cli').Migration} */
 const createGeneratedToken = {
@@ -35,3 +33,4 @@ const createGeneratedToken = {
 };
 
 export default createGeneratedToken;
+
