@@ -97,14 +97,6 @@ fieldset#description {
 	flex-grow: 1;
 }
 
-input {
-	padding: .2rem;
-}
-
-input[type="text"] {
-	padding: .3rem .2rem;
-}
-
 input#description {
 	width: 100%;
 }
@@ -112,12 +104,6 @@ input#description {
 textarea {
 	padding: .2rem;
 	width: 100%;
-}
-
-input, textarea {
-	background-color: rgba(238, 245, 253, 0.5);
-	border: none;
-	border-radius: 5px;
 }
 
 h4 {
