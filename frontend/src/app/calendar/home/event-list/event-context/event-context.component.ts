@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { Action, CalendarEvent } from 'src/types'
-import { EventService } from 'src/app/services/event.service'
+import { EventService } from 'src/app/services/event/event.service'
 import { AddEventPromptComponent } from './add-event-prompt/add-event-prompt.component'
 import { EventFormComponent } from './event-form/event-form.component'
 import { EventBadgeComponent } from './event-badge/event-badge.component'

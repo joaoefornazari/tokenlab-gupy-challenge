@@ -1,5 +1,5 @@
 import { Component, OnChanges, SimpleChanges, Input } from '@angular/core'
-import { ApiService } from 'src/app/services/api.service'
+import { ApiService } from 'src/app/services/api/api.service'
 import { DayInfo, CalendarEvent } from 'src/types'
 import { EventContextComponent } from './event-context/event-context.component'
 
