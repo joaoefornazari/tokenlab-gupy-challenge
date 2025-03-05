@@ -34,8 +34,8 @@ class UserController {
 
 	async login(req: Request, res: Response) {
     try {
-			const user = await userService.getUserToLogin(req.body);
-			res.status(200).json({ message: 'Login successful', user });
+			const token = await userService.getUserToLogin(req.body);
+			res.status(200).json(token);
     } catch (error: any) {
 			res.status(error?.cause?.code ? error.cause.code : 500).json({ error: error.message });
     }
