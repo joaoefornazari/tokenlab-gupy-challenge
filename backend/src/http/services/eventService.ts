@@ -1,7 +1,7 @@
 import EventRepository from "../repositories/eventRepository.ts";
 
 class EventService {
-	protected eventRepository: EventRepository;
+	private eventRepository: EventRepository;
 
 	constructor(eventRepository: EventRepository) {
 		this.eventRepository = eventRepository;
@@ -35,6 +35,10 @@ class EventService {
 			new Date(event.start_datetime) > new Date(event.end_datetime)
 		) {
 			throw new Error('Event datetime start and end are not valid.', { cause: { code: 400 } });
+		}
+
+		if (event.token) {
+			delete event.token
 		}
 
 		return await this.eventRepository.create(event);
