@@ -1,6 +1,8 @@
+import { randomUUID } from "crypto";
 import { UserRepositoryInterface } from "../interfaces/userRepositoryInterface.ts";
-import User from "../models/user.ts";
 import { compare } from "bcrypt";
+import User from "../models/user.ts";
+import jwt from 'jsonwebtoken';
 
 class UserRepository implements UserRepositoryInterface {
 
@@ -70,7 +72,10 @@ class UserRepository implements UserRepositoryInterface {
 
 			const response = user ? user.toJSON() : null;
 			delete response.id;
-			return response;
+			delete response.password;
+
+			const token = jwt.sign(response, randomUUID())
+			return { token, name: response.name }
 
 		} catch (error) {
 			throw new Error(`Failed to get user by credentials: ${error}`);
