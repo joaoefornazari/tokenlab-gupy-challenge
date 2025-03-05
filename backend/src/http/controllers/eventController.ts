@@ -48,7 +48,7 @@ class EventController {
 	async delete(req: Request, res: Response) {
 		try {
 			await eventService.deleteEvent(req.params.id);
-			await userEventService.removeEventFromUser({ userToken: req.params.token, eventId: req.params.id });
+			await userEventService.removeEventFromUser({ userToken: req.query.token, eventId: req.params.id });
 			res.status(204).send();
 		} catch (error: any) {
 			res.status(500).json({ error: error.message });
