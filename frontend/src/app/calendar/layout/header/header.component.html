@@ -1,9 +1,9 @@
 <div class="calendar-layout__header">
-	@if (currentRoute === '/calendar/login') {
+	@if (getCurrentRoute() === '/calendar/login') {
 		<h3 class="salutation">LOGIN</h3>
-	} @else if (currentRoute === '/calendar/logon') {
+	} @else if (getCurrentRoute() === '/calendar/logon') {
 		<h3 class="salutation">Logon</h3>
 	} @else {
-		<h3 class="salutation">Olá, </h3><h2>FULANO</h2>
+		<h3 class="salutation">Olá, </h3><h2>{{ getUserName() }}</h2>
 	}
 </div>

@@ -7,9 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-	constructor() {}
+	private userName: string = ''
+	
+	constructor() {
+		const cookie = document.cookie
+		const name = cookie.match(/name=([^;]*)/);
+		if (name) {
+			this.userName = name[1].toLocaleUpperCase()
+		}
+	}
 
-	public get currentRoute(): string {
+	public getUserName() {
+		return this.userName
+	}
+
+	public getCurrentRoute(): string {
 		const url = window.location.href
 		const urlParts = url.split('/')
 		return `/${urlParts[urlParts.length - 2]}/${urlParts[urlParts.length - 1]}`
