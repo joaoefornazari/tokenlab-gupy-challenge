@@ -1,22 +1,22 @@
 <form class="logon__form">
 	<fieldset>
 		<label for="name">Name:</label>
-		<input type="text" id="name" name="name" required>
+		<input type="text" id="name" name="name" [(ngModel)]="formData.name" required>
 	</fieldset>
 	<fieldset>
 		<label for="email">Email:</label>
-		<input type="email" id="email" name="email" required>
+		<input type="email" id="email" name="email" [(ngModel)]="formData.email" required>
 	</fieldset>
 	<fieldset>
 		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" minlength="12" required>
+		<input type="password" id="password" name="password" [(ngModel)]="formData.password" minlength="12" required>
 	</fieldset>
 	<fieldset>
 		<label for="confirm-password">Confirm Password:</label>
-		<input type="password" id="confirm-password" name="confirm-password" minlength="12" required>
+		<input type="password" id="confirm-password" name="confirm-password" [(ngModel)]="formData.confirmPassword" minlength="12" required>
 	</fieldset>
 	<div class="logon__buttons">
-		<button class="logon__action logon__cancel">CANCEL</button>
-		<button class="logon__action logon__save" type="submit">SAVE</button>
+		<button class="logon__action logon__cancel" (click)="onCancel()" >CANCEL</button>
+		<button class="logon__action logon__save" (click)="onSubmit()">SAVE</button>
 	</div>
 </form>
