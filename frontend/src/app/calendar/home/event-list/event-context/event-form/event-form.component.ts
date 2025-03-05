@@ -1,6 +1,6 @@
 import { Component, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
-import { EventService } from 'src/app/services/event.service'
-import { ApiService } from 'src/app/services/api.service'
+import { EventService } from 'src/app/services/event/event.service'
+import { ApiService } from 'src/app/services/api/api.service'
 import { FormsModule } from '@angular/forms'
 
 @Component({
