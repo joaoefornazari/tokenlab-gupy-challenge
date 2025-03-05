@@ -1,4 +1,4 @@
-<form>
+<form class="logon__form">
 	<fieldset>
 		<label for="name">Name:</label>
 		<input type="text" id="name" name="name" required>
@@ -15,5 +15,8 @@
 		<label for="confirm-password">Confirm Password:</label>
 		<input type="password" id="confirm-password" name="confirm-password" minlength="12" required>
 	</fieldset>
-	<button type="submit">Save</button>
+	<div class="logon__buttons">
+		<button class="logon__action logon__cancel">CANCEL</button>
+		<button class="logon__action logon__save" type="submit">SAVE</button>
+	</div>
 </form>
