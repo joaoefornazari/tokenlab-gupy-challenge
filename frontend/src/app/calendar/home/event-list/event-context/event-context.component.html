@@ -21,5 +21,9 @@
 }
 
 @if (currentAction === 'delete') {
-	<event-delete-confirm [eventId]="getEventId()"></event-delete-confirm>
+	<event-delete-confirm
+		[eventId]="getEventId()"
+		(deletedEvent)="onActionFinished()"
+		(cancelDelete)="onActionFinished()"
+	></event-delete-confirm>
 }
