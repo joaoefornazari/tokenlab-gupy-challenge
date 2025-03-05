@@ -1,13 +1,17 @@
 import { Request, Response } from 'express';
 import EventService from '../services/eventService.ts';
 import EventRepository from '../repositories/eventRepository.ts';
+import UserEventService from '../services/userEventService.ts';
+import UserEventRepository from '../repositories/userEventRepository.ts';
 
 const eventService = new EventService(new EventRepository());
+const userEventService = new UserEventService(new UserEventRepository());
 
 class EventController {
 	async create(req: Request, res: Response) {
 		try {
 			const event = await eventService.createEvent(req.body);
+			await userEventService.addEventToUser(req.body);
 			res.status(201).json(event);
 		} catch (error: any) {
 			res.status(error?.cause?.code ? error.cause.code : 500).json({ error: error.message });
@@ -44,6 +48,7 @@ class EventController {
 	async delete(req: Request, res: Response) {
 		try {
 			await eventService.deleteEvent(req.params.id);
+			await userEventService.removeEventFromUser({ userToken: req.params.token, eventId: req.params.id });
 			res.status(204).send();
 		} catch (error: any) {
 			res.status(500).json({ error: error.message });
