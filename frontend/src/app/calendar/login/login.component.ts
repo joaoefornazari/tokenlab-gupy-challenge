@@ -27,7 +27,7 @@ export class LoginComponent {
 	public async onSubmit() {
 		try {
 			const result = await this.api.post('/calendar/users/login', this.formData)
-			if (result.status === 'rejetcted') {
+			if (result.status === 'rejected') {
 				throw new Error(result.reason.response.data.error)
 			}
 			const token = result.value.data.token
