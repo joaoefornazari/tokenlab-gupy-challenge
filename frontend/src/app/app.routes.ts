@@ -3,6 +3,13 @@ import { LayoutComponent as CalendarLayout } from './calendar/layout/layout.comp
 import { HomeComponent } from './calendar/home/home.component';
 import { LoginComponent } from './calendar/login/login.component';
 import { LogonComponent } from './calendar/logon/logon.component';
+import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import AuthService from './services/auth/auth.service';
+
+export const authGuard: CanActivateFn = (route, state) => {
+	return inject(AuthService).isAuthenticated();
+};
 
 export const routes: Routes = [
 	{ 
@@ -17,6 +24,7 @@ export const routes: Routes = [
 			{
 				path: 'home',
 				component: HomeComponent,
+				canActivate: [authGuard],
 			},
 			{
 				path: 'login',
