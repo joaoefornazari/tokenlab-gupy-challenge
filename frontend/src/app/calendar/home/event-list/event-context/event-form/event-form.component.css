@@ -60,6 +60,7 @@
 .event-form__buttons > button {
 	border-radius: 5px;
 	border: none;
+	width: 5rem;
 }
 
 .cancel-event {
