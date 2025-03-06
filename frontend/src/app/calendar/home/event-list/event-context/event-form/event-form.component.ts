@@ -92,8 +92,8 @@ export class EventFormComponent implements OnChanges {
     }
 
 		// enviando a token para vincular evento ao usuário atual
-		const cookie = document.cookie.match(/token=[^;]*/)
-		const token = cookie ? cookie[0].replace('token=', '') : ''
+		const cookie = document.cookie.match(/token=([^;]*)/)
+		const token = cookie ? cookie[1] : ''
 		payload.userToken = token
 
     if (this.mode === 'edit') {

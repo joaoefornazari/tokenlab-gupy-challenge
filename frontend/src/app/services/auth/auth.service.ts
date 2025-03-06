@@ -10,7 +10,7 @@ export default class AuthService implements AuthServiceInterface {
 
 	public isAuthenticated(): boolean {
 		const cookie = document.cookie
-		const token = cookie.match(/token=[^;]*/)
+		const token = cookie.match(/token=([^;]*)/)
 		
 		if (!!token) {
 			return true
