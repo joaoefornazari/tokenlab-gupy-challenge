@@ -11,9 +11,8 @@ class UserEventService {
 		return await this.userEventRepository.getAll();
 	}
 
-	async addEventToUser(payload: { userToken: string, eventId: string }) {
-		const eventId = parseInt(payload.eventId);
-		const { userToken } = payload;
+	async addEventToUser(payload: { userToken: string, eventId: number }) {
+		const { userToken, eventId } = payload;
 		return await this.userEventRepository.create(userToken, eventId);
 	}
 

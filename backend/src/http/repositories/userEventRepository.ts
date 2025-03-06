@@ -1,6 +1,8 @@
+import { FindOptions, Model } from "sequelize";
 import UserEventRepositoryInterface from "../interfaces/userEventRepositoryInterface.ts";
 import GeneratedToken from "../models/generated-token.ts";
 import UserEvent from "../models/user-event.ts";
+import sequelize from "../../database/database.ts";
 
 class UserEventRepository implements UserEventRepositoryInterface {
 	
@@ -8,17 +10,26 @@ class UserEventRepository implements UserEventRepositoryInterface {
 	 * Get all user-event associations.
 	 * @returns A list of all user-event associations.
 	 */
-	async getAll(): Promise<any[]> {
+	async getAll(userId?: string): Promise<any[]> {
 		try {
-			const userEvents = await UserEvent.findAll();
-			return userEvents.map((ue) => ue.toJSON());
+			// const args = {} as FindOptions
+			// if (userId) {
+			// 	Object.assign(args, { where: { userId } })
+			// }
+			// const userEvents = await UserEvent.findAll(args);
+			const whereClause = `WHERE userId = "${userId}"`;
+
+			const [results, metadata] = await sequelize.query(`SELECT * FROM user_event ${userId ? whereClause : ''}`);
+			const userEvents = results
+
+			return userEvents
 		} catch (error) {
 			throw new Error(`Failed to get all user-event association list: ${error}`)
 		}
 	}
 
 	/**
-	 * Get a specific user-event association.
+	 * Get specific(s) user-event association.
 	 * @param userId The user associated to the event.
 	 * @param eventId The event associated to the user.
 	*/
@@ -45,8 +56,8 @@ class UserEventRepository implements UserEventRepositoryInterface {
 
 			const userId = generatedToken.toJSON().userId
 
-			const newUserEvent = await UserEvent.create({ userId, eventId })
-			return { id: newUserEvent.toJSON().id }
+			const [results, metadata] = await sequelize.query(`INSERT INTO user_event (userId, eventId)  VALUES ("${userId}", ${eventId})`)
+			return { message: 'Success' }
 		} catch (error) {
 			throw new Error(`Failed to associate user to event: ${error}`)
 		}
@@ -63,11 +74,9 @@ class UserEventRepository implements UserEventRepositoryInterface {
 			if (!generatedToken) throw new Error('Token not found.')
 
 			const userId = generatedToken.toJSON().userId
-			await UserEvent.destroy({
-				where: { userId, eventId }
-			});
+			await sequelize.query(`DELETE FROM user_event WHERE userId = "${userId}" AND eventId = ${eventId}`)
 		} catch (error) {
-			throw new Error(`Failed to delete event: ${error}`);
+			throw new Error(`Failed to delete event: ${error}`)
 		}
 	}
 }
