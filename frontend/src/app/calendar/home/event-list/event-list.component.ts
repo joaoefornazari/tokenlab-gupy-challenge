@@ -69,20 +69,29 @@ export class EventListComponent implements OnChanges {
 	}
 
 	public async fetchEvents() {
-		const cookie = document.cookie.match(/token=[^;]*/)
-		const token = cookie ? cookie[0].replace('token=', '') : ''
+		const cookie = document.cookie.match(/token=([^;]*)/)
+		const token = cookie ? cookie[1] : ''
 
-		const { value: { data: response } } = await this.api.get(`/calendar/events?token=${token}`)
-		this.days = this.initDays(this.maxDays)
-		response.forEach((event: CalendarEvent) => {
-			const day = new Date(event.start_datetime).getDate()
-			if (
-				this.currentMonth === new Date(event.start_datetime).getMonth() &&
-        this.currentYear === new Date(event.start_datetime).getFullYear()
-			) {
-				this.days[day - 1].events.push(event)
+		try {
+			const result = await this.api.get(`/calendar/events?token=${token}`)
+			if (result.status === 'rejected') {
+				throw new Error(result.reason.response.data.error)
 			}
-		})
+			const { value: { data: response } } = result
+			
+			this.days = this.initDays(this.maxDays)
+			response.forEach((event: CalendarEvent) => {
+				const day = new Date(event.start_datetime).getDate()
+				if (
+					this.currentMonth === new Date(event.start_datetime).getMonth() &&
+					this.currentYear === new Date(event.start_datetime).getFullYear()
+				) {
+					this.days[day - 1].events.push(event)
+				}
+			})
+		} catch (error: any) {
+			alert(error)
+		}
 	}
 
 }

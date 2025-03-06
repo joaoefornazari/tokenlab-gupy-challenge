@@ -2,6 +2,13 @@
 	display: flex;
 	flex-flow: row;
 	align-items: center;
+	justify-content: space-between;
+}
+
+.calendar-layout__salutation {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
 }
 
 .salutation {

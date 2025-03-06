@@ -1,14 +1,20 @@
 import { randomUUID } from 'crypto';
 import UserRepository from '../repositories/userRepository.ts';
+import GeneratedTokenRepository from '../repositories/generatedTokenRepository.ts';
 import { hash } from 'bcrypt';
 
 const SALTROUND = 10
 
 export default class UserService {
 	private userRepository: UserRepository;
+	private tokenRepository: GeneratedTokenRepository
 
-	constructor(userRepository: UserRepository) {
+	constructor(
+		userRepository: UserRepository,
+		tokenRepository: GeneratedTokenRepository,
+	) {
 		this.userRepository = userRepository;
+		this.tokenRepository = tokenRepository;
 	}
 
 	async getAllUsers() {
@@ -44,8 +50,10 @@ export default class UserService {
 		return this.userRepository.delete(id);
 	}
 
-	async getUserToLogin(credentials: { email: string, password: string }) {
+	async getUserToLogin(credentials: any) {
 		if (
+			!credentials.email ||
+			!credentials.password ||
 			credentials.email.length < 1 ||
 			credentials.password.length < 12
 		) {
@@ -53,10 +61,18 @@ export default class UserService {
 		}
 
 		if (!this.isValidEmail(credentials.email)) {
-			throw new Error('Invalid email.', { cause: { code: 400 } })
+			throw new Error('Invalid email.', { cause: { code: 400 } });
 		}
 
-		return this.userRepository.getByCredentials(credentials.email, credentials.password)
+		return this.userRepository.getByCredentials(credentials.email, credentials.password);
+	}
+
+	async logoutUser(credentials: any) {
+		if (!credentials.token) {
+			throw new Error('Invalid logout payload.', { cause: { code: 400 }});
+		}
+
+		return this.tokenRepository.delete(credentials.token)
 	}
 
 
