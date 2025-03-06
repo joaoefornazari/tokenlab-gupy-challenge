@@ -4,9 +4,12 @@
 		<input type="email" id="email" name="email" [(ngModel)]="formData.email" required>
 	</fieldset>
 	<fieldset>
-		<label for="password">Password:</label>
+		<label for="password">Senha:</label>
 		<input type="password" id="password" name="password" [(ngModel)]="formData.password" minlength="12" required>
 	</fieldset>
+	<div class="login__hyperlink-container">
+		<span>Não tem uma conta? <a routerLink="/calendar/logon" routerLinkActive="active">Cadastre-se</a></span>
+	</div>
 	<div class="login__buttons">
 		<button class="login__action" (click)="onSubmit()">LOGIN</button>
 	</div>
