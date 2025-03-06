@@ -4,6 +4,9 @@
 	} @else if (getCurrentRoute() === '/calendar/logon') {
 		<h3 class="salutation">LOGON</h3>
 	} @else {
-		<h3 class="salutation">Olá, </h3><h2>{{ getUserName() }}</h2>
+		<div class="calendar-layout__salutation">
+			<h3 class="salutation">Olá, </h3><h2>{{ getUserName() }}</h2>
+		</div>
+		<button class="btn-standard" (click)="onLogout()">LOGOUT</button>
 	}
 </div>
