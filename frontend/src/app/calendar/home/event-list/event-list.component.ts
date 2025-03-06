@@ -69,8 +69,11 @@ export class EventListComponent implements OnChanges {
 	}
 
 	public async fetchEvents() {
-		const { value: { data: response } } = await this.api.get('/calendar/events')
-        this.days = this.initDays(this.maxDays)
+		const cookie = document.cookie.match(/token=[^;]*/)
+		const token = cookie ? cookie[0].replace('token=', '') : ''
+
+		const { value: { data: response } } = await this.api.get(`/calendar/events?token=${token}`)
+		this.days = this.initDays(this.maxDays)
 		response.forEach((event: CalendarEvent) => {
 			const day = new Date(event.start_datetime).getDate()
 			if (

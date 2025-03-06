@@ -10,7 +10,7 @@ const createUserEventTableMigration = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-		await queryInterface.createTable('user-event', {
+		await queryInterface.createTable('user_event', {
 			userId: {
 				type: DataTypes.UUID,
 				allowNull: false,
@@ -27,6 +27,15 @@ const createUserEventTableMigration = {
 					key: 'id',
 				},
 			},
+			createdAt: {
+				type: DataTypes.DATE,
+				allowNull: false,
+				defaultValue: Sequelize.fn('NOW')
+			},
+			updatedAt: {
+				type: DataTypes.DATE,
+				allowNull: true,
+			},
 		});
   },
 
@@ -37,7 +46,8 @@ const createUserEventTableMigration = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-	await queryInterface.dropTable('user-event');
+		await queryInterface.removeConstraint('user_event', 'user_event_ibfk_1');
+		await queryInterface.dropTable('user_event');
   }
 };
 export default createUserEventTableMigration;

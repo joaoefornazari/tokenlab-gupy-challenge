@@ -3,6 +3,7 @@ import { UserRepositoryInterface } from "../interfaces/userRepositoryInterface.t
 import { compare } from "bcrypt";
 import User from "../models/user.ts";
 import jwt from 'jsonwebtoken';
+import GeneratedToken from "../models/generated-token.ts";
 
 class UserRepository implements UserRepositoryInterface {
 
@@ -71,10 +72,12 @@ class UserRepository implements UserRepositoryInterface {
 			}
 
 			const response = user ? user.toJSON() : null;
-			delete response.id;
 			delete response.password;
 
-			const token = jwt.sign(response, randomUUID())
+			const token = jwt.sign({}, response.id)
+			GeneratedToken.create({ token, userId: response.id })
+			
+			delete response.id;
 			return { token, name: response.name }
 
 		} catch (error) {

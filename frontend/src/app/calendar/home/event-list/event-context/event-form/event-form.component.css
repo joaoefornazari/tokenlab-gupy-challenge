@@ -60,7 +60,7 @@
 .event-form__buttons > button {
 	border-radius: 5px;
 	border: none;
-	width: 5rem;
+	width: 6rem;
 }
 
 .cancel-event {
@@ -78,7 +78,7 @@
 }
 
 .save-event:hover {
-	background-color: #54ea6b;
+	background-color: #70a478;
 }
 
 fieldset {

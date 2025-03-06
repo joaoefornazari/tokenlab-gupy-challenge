@@ -1,14 +1,20 @@
 import EventRepository from "../repositories/eventRepository.ts";
+import GeneratedToken from "../models/generated-token.ts";
 
 class EventService {
-	protected eventRepository: EventRepository;
+	private eventRepository: EventRepository;
 
 	constructor(eventRepository: EventRepository) {
 		this.eventRepository = eventRepository;
 	}
 
-	async getEvents() {
-		return await this.eventRepository.getAll();	
+	async getEvents(token: string) {
+    const generatedToken = await GeneratedToken.findOne({ where: { token } });
+    if (!generatedToken) throw new Error('Token not found.');
+
+    const userId = generatedToken.toJSON().userId
+
+		return await this.eventRepository.getAll(userId);	
 	}
 
 	async getEvent(id: string) {
@@ -35,6 +41,10 @@ class EventService {
 			new Date(event.start_datetime) > new Date(event.end_datetime)
 		) {
 			throw new Error('Event datetime start and end are not valid.', { cause: { code: 400 } });
+		}
+
+		if (event.token) {
+			delete event.token
 		}
 
 		return await this.eventRepository.create(event);

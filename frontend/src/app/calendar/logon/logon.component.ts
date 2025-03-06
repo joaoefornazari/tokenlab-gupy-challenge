@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'calendar-logon',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink, RouterLinkActive],
   templateUrl: './logon.component.html',
 	styleUrls: ['./logon.component.css']
 })

@@ -1,15 +1,29 @@
 import EventRepositoryInterface from '../interfaces/eventRepositoryInterface.ts';
 import Event from '../models/event.ts';
+import UserEventRepository from '../repositories/userEventRepository.ts'
+import { Op } from 'sequelize';
 
 class EventRepository implements EventRepositoryInterface {
 
 	/**
 	 * Get all events.
+	 * @param userId (optional) User id to filter events
 	 * @returns A list of all events.
 	 */
-	async getAll(): Promise<any> {
+	async getAll(userId?: string): Promise<any> {
 		try {
-			const events = await Event.findAll();
+      const userEventRepository = new UserEventRepository()
+      const userEvents = await userEventRepository.getAll(userId)
+
+			const args = userEvents ? {
+				where: {
+					id: userEvents.map((ue) => ue.eventId)
+				}
+			} : {}
+
+			console.log(args)
+
+			const events = await Event.findAll(args);
 			return events.map(evt => evt.toJSON());
 		} catch (error) {
 			throw new Error(`Failed to get all events: ${error}`);

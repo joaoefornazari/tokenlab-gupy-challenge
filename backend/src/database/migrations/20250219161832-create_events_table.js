@@ -30,7 +30,7 @@ const migration = {
 			createdAt: {
 				type: DataTypes.DATE,
 				allowNull: false,
-				defaultValue: DataTypes.NOW,
+				defaultValue: Sequelize.fn('NOW')
 			},
 			updatedAt: {
 				type: DataTypes.DATE,
