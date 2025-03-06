@@ -31,7 +31,10 @@ export class EventDeleteConfirmComponent {
 
 	public async onDelete() {
 		try {
-			const result = await this.api.delete(`/calendar/events/${this.eventId}`)
+			const cookie = document.cookie.match(/token=[^;]*/)
+			const token = cookie ? cookie[0].replace('token=', '') : ''
+
+			const result = await this.api.delete(`/calendar/events/${this.eventId}?token=${token}`)
 			if (result.status === 'rejected') {
 				throw new Error(result.reason.response.data.error)
 			}

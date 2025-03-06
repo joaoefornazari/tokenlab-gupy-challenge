@@ -87,10 +87,14 @@ export class EventFormComponent implements OnChanges {
       content: this.formData.content,
       description: this.formData.description,
       start_datetime: new Date(this.formData.start).toISOString(),
-      end_datetime: new Date(this.formData.end).toISOString()
+      end_datetime: new Date(this.formData.end).toISOString(),
+			userToken: ""
     }
 
-    console.log(payload)
+		// enviando a token para vincular evento ao usuário atual
+		const cookie = document.cookie.match(/token=[^;]*/)
+		const token = cookie ? cookie[0].replace('token=', '') : ''
+		payload.userToken = token
 
     if (this.mode === 'edit') {
 			return this.api.put(`/calendar/events/${this.event.getEventProp('id')}`, payload)
