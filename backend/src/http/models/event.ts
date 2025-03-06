@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../../database/database.ts';
 
 const Event = sequelize.define(
-	'Event',
+	'Events',
 	{
 		id: {
 			type: DataTypes.INTEGER,

@@ -5,7 +5,7 @@ const UserEvent = sequelize.define(
 	'UserEvent',
 	{
 		userId: {
-			type: DataTypes.UUIDV4,
+			type: DataTypes.UUID,
 			allowNull: false,
 			references: {
 				model: 'Users',
@@ -23,7 +23,7 @@ const UserEvent = sequelize.define(
 		createdAt: {
 			type: DataTypes.DATE,
 			allowNull: false,
-			defaultValue: DataTypes.NOW,
+			defaultValue: DataTypes.NOW(),
 		},
 		updatedAt: {
 			type: DataTypes.DATE,
@@ -31,7 +31,7 @@ const UserEvent = sequelize.define(
 		},
 	},
 	{
-		tableName: 'user-event',
+		tableName: 'user_event',
 	}
 )
 
