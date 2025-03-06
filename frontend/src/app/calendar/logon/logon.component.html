@@ -1,6 +1,6 @@
 <form class="logon__form">
 	<fieldset>
-		<label for="name">Name:</label>
+		<label for="name">Nome:</label>
 		<input type="text" id="name" name="name" [(ngModel)]="formData.name" required>
 	</fieldset>
 	<fieldset>
@@ -8,15 +8,18 @@
 		<input type="email" id="email" name="email" [(ngModel)]="formData.email" required>
 	</fieldset>
 	<fieldset>
-		<label for="password">Password:</label>
+		<label for="password">Senha:</label>
 		<input type="password" id="password" name="password" [(ngModel)]="formData.password" minlength="12" required>
 	</fieldset>
 	<fieldset>
-		<label for="confirm-password">Confirm Password:</label>
+		<label for="confirm-password">Confirmar Senha:</label>
 		<input type="password" id="confirm-password" name="confirm-password" [(ngModel)]="formData.confirmPassword" minlength="12" required>
 	</fieldset>
+	<div class="logon__hyperlink-container">
+		<span>Já possui conta? <a routerLink="/calendar/login" routerLinkActive="active">Faça login</a></span>
+	</div>
 	<div class="logon__buttons">
-		<button class="logon__action logon__cancel" (click)="onCancel()" >CANCEL</button>
-		<button class="logon__action logon__save" (click)="onSubmit()">SAVE</button>
+		<button class="logon__action logon__cancel" (click)="onCancel()" >CANCELAR</button>
+		<button class="logon__action logon__save" (click)="onSubmit()">SALVAR</button>
 	</div>
 </form>
