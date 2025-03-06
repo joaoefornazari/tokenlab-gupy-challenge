@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
 import UserService from '../services/userService.ts'
 import UserRepository from '../repositories/userRepository.ts'
+import generatedTokenRepository from '../repositories/generatedTokenRepository.ts';
 
-const userService = new UserService(new UserRepository())
+const userService = new UserService(new UserRepository(), new generatedTokenRepository())
 
 class UserController {
 	async create(req: Request, res: Response) {
@@ -39,7 +40,16 @@ class UserController {
     } catch (error: any) {
 			res.status(error?.cause?.code ? error.cause.code : 500).json({ error: error.message });
     }
-}
+	}
+
+	async logout(req: Request, res: Response) {
+		try {
+			await userService.logoutUser(req.body);
+			res.status(200).json();
+    } catch (error: any) {
+			res.status(error?.cause?.code ? error.cause.code : 500).json({ error: error.message });
+    }
+	}
 }
 
 export default new UserController;

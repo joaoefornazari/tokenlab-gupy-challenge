@@ -17,4 +17,7 @@ router.delete('/:id', UserController.delete)
 /* POST login a user */
 router.post('/login', UserController.login)
 
+/* POST logout a user */
+router.post('/logout', UserController.logout)
+
 export default router;
