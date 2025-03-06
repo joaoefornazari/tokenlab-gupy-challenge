@@ -11,9 +11,12 @@ class EventController {
 	async create(req: Request, res: Response) {
 		try {
 			const event = await eventService.createEvent(req.body);
+
 			Object.assign(req.body, { eventId: event.id })
       await userEventService.addEventToUser(req.body);
+
 			res.status(201).json(event);
+
 		} catch (error: any) {
 			res.status(error?.cause?.code ? error.cause.code : 500).json({ error: error.message });
 		}
@@ -24,6 +27,7 @@ class EventController {
 			const token = req.query.token as string
 			const events = await eventService.getEvents(token);
 			res.status(200).json(events);
+
 		} catch (error: any) {
 			res.status(500).json({ error: error.message });
 		}
@@ -33,6 +37,7 @@ class EventController {
 		try {
 			const event = await eventService.getEvent(req.params.id);
 			res.status(200).json(event);
+
 		} catch (error: any) {
 			res.status(500).json({ error: error.message });
 		}
@@ -42,6 +47,7 @@ class EventController {
 		try {
 			const event = await eventService.updateEvent(req.params.id, req.body);
 			res.status(200).json(event);
+
 		} catch (error: any) {
 			res.status(500).json({ error: error.message });
 		}
@@ -50,11 +56,14 @@ class EventController {
 	async delete(req: Request, res: Response) {
 		try {
 			await eventService.deleteEvent(req.params.id);
+
 			const token = req.query.token as string
 			await userEventService.removeEventFromUser({ userToken: token, eventId: req.params.id });
+			
 			res.status(204).send();
+
 		} catch (error: any) {
-			res.status(500).json({ error: error.message });
+			res.status(error?.cause?.code ? error.cause.code : 500).json({ error: error.message });
 		}
 	}
 }

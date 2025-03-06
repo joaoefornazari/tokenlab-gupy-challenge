@@ -52,7 +52,7 @@ class UserEventRepository implements UserEventRepositoryInterface {
 	async create(userToken: string, eventId: number): Promise<any> {
 		try {
 			const generatedToken = await GeneratedToken.findOne({ where: { token: userToken } })
-			if (!generatedToken) throw new Error('Token not found.')
+			if (!generatedToken) throw new Error('Token not found.', { cause: { code: 404 } })
 
 			const userId = generatedToken.toJSON().userId
 
@@ -71,7 +71,7 @@ class UserEventRepository implements UserEventRepositoryInterface {
 	async delete(userToken: string, eventId: number): Promise<void> {
 		try {
 			const generatedToken = await GeneratedToken.findOne({ where: { token: userToken } })
-			if (!generatedToken) throw new Error('Token not found.')
+			if (!generatedToken) throw new Error('Token not found.', { cause: { code: 404 } })
 
 			const userId = generatedToken.toJSON().userId
 			await sequelize.query(`DELETE FROM user_event WHERE userId = "${userId}" AND eventId = ${eventId}`)
